@@ -217,30 +217,17 @@
       transform: translateY(-4px);
       border-color: var(--morandi-rose);
     }
-    .cell-tag {
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 0.25rem 0.7rem;
-      border-radius: 12px;
-      color: white;
-      margin-bottom: 0.5rem;
-    }
-    .tag-adventure { background: var(--morandi-rose-dark); }
-    .tag-gift { background: var(--morandi-sage); }
-    .tag-chance { background: var(--morandi-sand); }
-    .tag-destiny { background: var(--morandi-purple); }
-    .tag-history { background: var(--morandi-terracotta); }
-    .tag-start { background: var(--morandi-blue); }
-
-    .cell-icon {
-      font-size: 2.2rem;
-      color: var(--text-main);
-      margin: 0.4rem 0;
-    }
+    
+    /* 大標題放大，超越 Icon */
     .cell-title {
-      font-size: 1.15rem;
+      font-size: 1.35rem;
       font-weight: 900;
       color: var(--text-main);
+      margin-bottom: 0.4rem;
+    }
+    .cell-icon {
+      font-size: 1.1rem;
+      color: var(--text-muted);
     }
 
     /* Board Center Area */
@@ -257,6 +244,7 @@
       justify-content: center;
       padding: 1.5rem;
       position: relative;
+      perspective: 1000px;
     }
     .turn-badge {
       font-size: 1.3rem;
@@ -268,30 +256,34 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       margin-bottom: 1rem;
     }
+    
+    /* 3D 骰子動畫 */
     .dice-box {
       width: 95px;
       height: 95px;
       background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      border-radius: 22px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 3.2rem;
+      font-size: 3.5rem;
       color: var(--morandi-rose-dark);
       margin-bottom: 1.2rem;
+      transform-style: preserve-3d;
       transition: transform 0.1s;
     }
-    .dice-shake {
-      animation: shake 0.5s infinite;
+    .dice-rolling {
+      animation: dice3d 0.6s ease-in-out infinite;
     }
-    @keyframes shake {
-      0% { transform: rotate(0deg) scale(1); }
-      25% { transform: rotate(15deg) scale(1.1); }
-      50% { transform: rotate(-15deg) scale(1.1); }
-      75% { transform: rotate(-10deg) scale(1.05); }
-      100% { transform: rotate(0deg) scale(1); }
+    @keyframes dice3d {
+      0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); }
+      25% { transform: rotateX(180deg) rotateY(90deg) rotateZ(45deg) scale(1.15); }
+      50% { transform: rotateX(360deg) rotateY(180deg) rotateZ(180deg) scale(0.9); }
+      75% { transform: rotateX(540deg) rotateY(270deg) rotateZ(225deg) scale(1.1); }
+      100% { transform: rotateX(720deg) rotateY(360deg) rotateZ(360deg) scale(1); }
     }
+
     .btn-group {
       display: flex;
       gap: 1rem;
@@ -322,26 +314,33 @@
       font-family: var(--font-family);
     }
 
-    /* Pawns Container inside Cells */
+    /* Pawns Container - 超顯眼隊伍旗子 */
     .pawn-container {
       position: absolute;
-      bottom: 4px;
+      bottom: 6px;
       display: flex;
-      gap: 4px;
+      gap: 6px;
       flex-wrap: wrap;
       justify-content: center;
+      z-index: 10;
     }
     .pawn {
-      width: 24px;
-      height: 24px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       color: white;
-      font-size: 0.8rem;
+      font-size: 1.1rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.4);
+      border: 2px solid white;
       font-weight: bold;
+      animation: pawnBounce 0.5s ease;
+    }
+    @keyframes pawnBounce {
+      0% { transform: translateY(-10px) scale(1.2); }
+      100% { transform: translateY(0) scale(1); }
     }
 
     /* Slide 3: Intermission */
@@ -525,7 +524,7 @@
   <!-- Challenge Modal -->
   <div class="modal-overlay" id="challenge-modal">
     <div class="modal-card">
-      <div class="modal-tag" id="modal-tag">爆笑大冒險</div>
+      <div class="modal-tag" id="modal-tag">大冒險</div>
       <h2 class="modal-title" id="modal-title">卡牌名稱</h2>
       <p class="modal-desc" id="modal-desc">詳細挑戰內容說明...</p>
       <button class="modal-close-btn" onclick="closeModal()">完成關卡</button>
@@ -559,8 +558,8 @@
       <div class="tab-header">
         <button class="tab-btn active" onclick="switchTab('adventure')">🎭 大冒險</button>
         <button class="tab-btn" onclick="switchTab('gift')">🎁 0元禮</button>
-        <button class="tab-btn" onclick="switchTab('chance')">✨ 機會卡</button>
-        <button class="tab-btn" onclick="switchTab('destiny')">🔮 命運卡</button>
+        <button class="tab-btn" onclick="switchTab('chance')">✨ 機會</button>
+        <button class="tab-btn" onclick="switchTab('destiny')">🔮 命運</button>
         <button class="tab-btn" onclick="switchTab('history')">📸 黑歷史</button>
       </div>
 
@@ -600,7 +599,7 @@
         "名偵探柯南麻醉槍：假裝用手錶射擊，新人瞬間沉睡癱倒。(4秒影片)"
       ],
       gift: [
-        "🎁 獲得新郎 Alice/Wei 深情親親臉頰 10 秒！",
+        "🎁 獲得新人深情親親臉頰 10 秒！",
         "🎁 現場餵食特權：由新人現場親手餵你吃甜點蛋糕！",
         "🎁 拍立得合照：獲得與新人現場拍立得合照乙張！"
       ],
@@ -618,20 +617,20 @@
     };
 
     const boardCellsData = [
-      { id: 0, tag: 'START', label: '起點', icon: 'fa-flag-checkered', type: 'start' },
-      { id: 1, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-masks-theater', type: 'adventure' },
-      { id: 2, tag: '0元禮', label: '現場即時好禮', icon: 'fa-gift', type: 'gift' },
-      { id: 3, tag: '機會', label: '機會卡', icon: 'fa-wand-magic-sparkles', type: 'chance' },
-      { id: 4, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-bolt', type: 'adventure' },
-      { id: 5, tag: '命運', label: '命運卡', icon: 'fa-crystal-ball', type: 'destiny' },
-      { id: 6, tag: '黑歷史', label: '黑歷史解密', icon: 'fa-camera-retro', type: 'history' },
-      { id: 7, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-clapperboard', type: 'adventure' },
-      { id: 8, tag: '0元禮', label: '現場即時好禮', icon: 'fa-heart', type: 'gift' },
-      { id: 9, tag: '機會', label: '機會卡', icon: 'fa-clover', type: 'chance' },
-      { id: 10, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-dragon', type: 'adventure' },
-      { id: 11, tag: '命運', label: '命運卡', icon: 'fa-dice-five', type: 'destiny' },
-      { id: 12, tag: '黑歷史', label: '黑歷史解密', icon: 'fa-user-ninja', type: 'history' },
-      { id: 13, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-fire', type: 'adventure' }
+      { id: 0, label: '起點', icon: 'fa-flag-checkered', type: 'start' },
+      { id: 1, label: '大冒險', icon: 'fa-masks-theater', type: 'adventure' },
+      { id: 2, label: '0元禮', icon: 'fa-gift', type: 'gift' },
+      { id: 3, label: '機會', icon: 'fa-wand-magic-sparkles', type: 'chance' },
+      { id: 4, label: '大冒險', icon: 'fa-bolt', type: 'adventure' },
+      { id: 5, label: '命運', icon: 'fa-crystal-ball', type: 'destiny' },
+      { id: 6, label: '黑歷史', icon: 'fa-camera-retro', type: 'history' },
+      { id: 7, label: '大冒險', icon: 'fa-clapperboard', type: 'adventure' },
+      { id: 8, label: '0元禮', icon: 'fa-heart', type: 'gift' },
+      { id: 9, label: '機會', icon: 'fa-clover', type: 'chance' },
+      { id: 10, label: '大冒險', icon: 'fa-dragon', type: 'adventure' },
+      { id: 11, label: '命運', icon: 'fa-dice-five', type: 'destiny' },
+      { id: 12, label: '黑歷史', icon: 'fa-user-ninja', type: 'history' },
+      { id: 13, label: '大冒險', icon: 'fa-fire', type: 'adventure' }
     ];
 
     // Navigation
@@ -680,17 +679,9 @@
         cellEl.style.gridRow = pos.r;
         cellEl.style.gridColumn = pos.c;
 
-        let tagClass = 'tag-adventure';
-        if(cellData.type === 'gift') tagClass = 'tag-gift';
-        if(cellData.type === 'chance') tagClass = 'tag-chance';
-        if(cellData.type === 'destiny') tagClass = 'tag-destiny';
-        if(cellData.type === 'history') tagClass = 'tag-history';
-        if(cellData.type === 'start') tagClass = 'tag-start';
-
         cellEl.innerHTML = `
-          <div class="cell-tag ${tagClass}">${cellData.tag}</div>
-          <div class="cell-icon"><i class="fa-solid ${cellData.icon}"></i></div>
           <div class="cell-title">${cellData.label}</div>
+          <div class="cell-icon"><i class="fa-solid ${cellData.icon}"></i></div>
           <div class="pawn-container" id="pawns-cell-${idx}"></div>
         `;
 
@@ -720,22 +711,28 @@
       });
     }
 
-    // Dice & Game Mechanics
+    // Dice & Game Mechanics with 3D Animation
     function rollDice() {
       const diceBox = document.getElementById('dice-box');
-      diceBox.classList.add('dice-shake');
+      diceBox.classList.add('dice-rolling');
+
+      const diceEmojis = ['🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
+      let animInterval = setInterval(() => {
+        diceBox.innerText = diceEmojis[Math.floor(Math.random() * 6) + 1];
+      }, 80);
 
       setTimeout(() => {
-        diceBox.classList.remove('dice-shake');
+        clearInterval(animInterval);
+        diceBox.classList.remove('dice-rolling');
         const rolled = Math.floor(Math.random() * 6) + 1;
-        diceBox.innerText = rolled;
+        diceBox.innerText = diceEmojis[rolled];
 
         teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + rolled) % 14;
         renderPawns();
 
         const landedCell = boardCellsData[teams[currentTeamIndex].pos];
         setTimeout(() => triggerCellEvent(landedCell), 300);
-      }, 500);
+      }, 600);
     }
 
     function nextTurn() {
@@ -749,7 +746,7 @@
       const title = document.getElementById('modal-title');
       const desc = document.getElementById('modal-desc');
 
-      tag.innerText = cell.tag;
+      tag.innerText = cell.label;
       title.innerText = cell.label;
 
       const pool = cardPools[cell.type] || ["🎉 祝福 Wei & Alice 新婚快樂、永浴愛河！"];
