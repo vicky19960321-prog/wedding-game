@@ -23,9 +23,6 @@
       --morandi-purple: #B5A7C9;
       --morandi-terracotta: #D98A72;
       
-      /* Foil Stamp High Contrast Gold Palette */
-      --foil-gold-text: linear-gradient(135deg, #FFE8A3 0%, #FDF0A6 25%, #D4AF37 50%, #FFF5CC 75%, #C5A059 100%);
-      
       --text-main: #4A403A;
       --text-muted: #8C7A6B;
       --border-color: #E6DCD0;
@@ -107,9 +104,8 @@
       width: 100%;
       height: 480px;
       object-fit: cover;
-      object-position: 50% 98%;
+      object-position: 50% 50%;
       border-radius: 6px;
-      filter: grayscale(80%) contrast(120%) sepia(20%);
     }
 
     .cover-content {
@@ -235,81 +231,81 @@
       line-height: 1.3;
     }
 
-    /* Center Section - High-Contrast Foil Badge Style */
+    /* Center Section - Korean Polaroid Gallery Style */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       border-radius: var(--radius-lg);
-      border: 2px solid #D4AF37;
-      box-shadow: 0 10px 30px rgba(120, 100, 80, 0.12);
+      border: 2px dashed var(--border-color);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 1.5rem 2rem;
+      padding: 1.2rem 1.5rem;
       position: relative;
     }
 
-    .center-wedding-logo {
+    /* Center Polaroid Frame Component */
+    .center-polaroid {
+      background: white;
+      padding: 0.8rem 0.8rem 1rem 0.8rem;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transform: rotate(-1.5deg);
+      cursor: pointer;
+      transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.3rem;
-      z-index: 2;
-      background: linear-gradient(135deg, #4A3A35 0%, #2D2320 100%);
-      padding: 0.8rem 2.2rem;
-      border-radius: 18px;
-      border: 2px solid #D4AF37;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-      width: 90%;
+      max-width: 280px;
+      width: 100%;
     }
-    .center-logo-badge {
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      font-weight: 800;
-      color: #FDF0A6;
-      background: rgba(212, 175, 55, 0.2);
-      padding: 0.2rem 0.9rem;
-      border-radius: 12px;
-      border: 1px solid rgba(212, 175, 55, 0.5);
+    .center-polaroid:hover {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
     }
-    .center-logo-names {
-      font-size: 2.2rem;
+    .center-polaroid-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: 50% 50%;
+      border-radius: 4px;
+    }
+    .center-polaroid-footer {
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+    .center-polaroid-names {
+      font-size: 1.2rem;
       font-weight: 900;
-      background: var(--foil-gold-text);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+      color: var(--morandi-rose-dark);
     }
-    .center-logo-sub {
-      font-size: 0.9rem;
+    .center-polaroid-sub {
+      font-size: 0.75rem;
       font-style: italic;
-      color: #E2D7C8;
-      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-top: 0.1rem;
     }
 
     .turn-badge {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 900;
       color: var(--text-main);
       background: white;
-      padding: 0.4rem 1.8rem;
+      padding: 0.4rem 1.6rem;
       border-radius: 30px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       border: 1px solid var(--border-color);
-      z-index: 2;
     }
 
     /* Refined Clean 3D Cute Dice */
     .dice-scene {
-      width: 80px;
-      height: 80px;
+      width: 75px;
+      height: 75px;
       perspective: 600px;
       margin: 0.2rem 0;
-      z-index: 2;
     }
     .cube {
       width: 100%;
@@ -320,43 +316,42 @@
     }
     .cube-face {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 75px;
+      height: 75px;
       background: #FFFFFF;
-      border-radius: 16px;
-      box-shadow: inset 0 0 0 2px #E6DCD0, inset 0 -3px 6px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.08);
+      border-radius: 14px;
+      box-shadow: inset 0 0 0 2px #E6DCD0, inset 0 -3px 6px rgba(0,0,0,0.05), 0 8px 16px rgba(0,0,0,0.08);
       display: grid;
       grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-      padding: 10px;
+      padding: 9px;
       align-items: center;
       justify-items: center;
       backface-visibility: hidden;
     }
     .dot {
-      width: 13px;
-      height: 13px;
+      width: 12px;
+      height: 12px;
       background: var(--morandi-rose-dark);
       border-radius: 50%;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
     }
-    .face-1 { transform: rotateY(0deg) translateZ(40px); }
-    .face-2 { transform: rotateY(90deg) translateZ(40px); }
-    .face-3 { transform: rotateY(180deg) translateZ(40px); }
-    .face-4 { transform: rotateY(-90deg) translateZ(40px); }
-    .face-5 { transform: rotateX(90deg) translateZ(40px); }
-    .face-6 { transform: rotateX(-90deg) translateZ(40px); }
+    .face-1 { transform: rotateY(0deg) translateZ(37.5px); }
+    .face-2 { transform: rotateY(90deg) translateZ(37.5px); }
+    .face-3 { transform: rotateY(180deg) translateZ(37.5px); }
+    .face-4 { transform: rotateY(-90deg) translateZ(37.5px); }
+    .face-5 { transform: rotateX(90deg) translateZ(37.5px); }
+    .face-6 { transform: rotateX(-90deg) translateZ(37.5px); }
 
     .btn-group {
       display: flex;
-      gap: 1rem;
-      z-index: 2;
+      gap: 0.8rem;
     }
     .roll-btn {
       background: var(--morandi-rose-dark);
       color: white;
       border: none;
-      padding: 0.8rem 2rem;
-      font-size: 1.2rem;
+      padding: 0.75rem 1.8rem;
+      font-size: 1.15rem;
       font-weight: 700;
       border-radius: 40px;
       cursor: pointer;
@@ -369,8 +364,8 @@
       background: var(--text-main);
       color: white;
       border: none;
-      padding: 0.8rem 1.6rem;
-      font-size: 1.1rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.05rem;
       font-weight: 700;
       border-radius: 40px;
       cursor: pointer;
@@ -528,7 +523,7 @@
       <div class="cover-slide">
         <div class="cover-photo-wrapper">
           <div class="polaroid-frame" onclick="document.getElementById('photo-uploader').click()">
-            <img id="cover-photo" class="polaroid-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="婚紗照">
+            <img id="cover-photo" class="polaroid-img" src="https://lh3.googleusercontent.com/d/1VdcImiHeczw-X-hxGd7fvn0P0XuzjCBV" alt="婚紗照">
           </div>
           <input type="file" id="photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCoverPhoto(event)">
         </div>
@@ -558,13 +553,16 @@
       </div>
 
       <div class="monopoly-board" id="board">
-        <!-- Center Section with High Contrast Foil Stamp Gold Wedding Badge -->
+        <!-- Center Section with Korean Polaroid Gallery -->
         <div class="board-center">
-          <div class="center-wedding-logo">
-            <span class="center-logo-badge">WEDDING AFTERPARTY</span>
-            <div class="center-logo-names">Wei ❤️ Alice</div>
-            <div class="center-logo-sub">“Eat, Drink, and be Married!”</div>
+          <div class="center-polaroid" onclick="document.getElementById('center-photo-uploader').click()">
+            <img id="center-photo" class="center-polaroid-img" src="https://lh3.googleusercontent.com/d/1VdcImiHeczw-X-hxGd7fvn0P0XuzjCBV" alt="相框照片">
+            <div class="center-polaroid-footer">
+              <div class="center-polaroid-names">Wei ❤️ Alice</div>
+              <div class="center-polaroid-sub">“Eat, Drink, and be Married!”</div>
+            </div>
           </div>
+          <input type="file" id="center-photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCenterPhoto(event)">
 
           <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
           
@@ -722,7 +720,7 @@
       slides[currentSlide].classList.add('active');
     }
 
-    // Photo Upload
+    // Photo Upload - Cover
     function uploadCoverPhoto(event) {
       const file = event.target.files[0];
       if (file) {
@@ -730,6 +728,19 @@
         reader.onload = function(e) {
           document.getElementById('cover-photo').src = e.target.result;
           localStorage.setItem('wedding_cover_photo', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Photo Upload - Center Polaroid
+    function uploadCenterPhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('center-photo').src = e.target.result;
+          localStorage.setItem('wedding_center_photo', e.target.result);
         };
         reader.readAsDataURL(file);
       }
@@ -917,11 +928,15 @@
       document.getElementById('edit-modal').classList.remove('active');
     }
 
-    // Load saved photo on startup
+    // Load saved photos on startup
     window.onload = function() {
-      const savedPhoto = localStorage.getItem('wedding_cover_photo');
-      if(savedPhoto) {
-        document.getElementById('cover-photo').src = savedPhoto;
+      const savedCoverPhoto = localStorage.getItem('wedding_cover_photo');
+      if(savedCoverPhoto) {
+        document.getElementById('cover-photo').src = savedCoverPhoto;
+      }
+      const savedCenterPhoto = localStorage.getItem('wedding_center_photo');
+      if(savedCenterPhoto) {
+        document.getElementById('center-photo').src = savedCenterPhoto;
       }
       renderBoard();
     };
