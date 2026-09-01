@@ -231,7 +231,7 @@
       line-height: 1.3;
     }
 
-    /* Center Section - Optimized Filled Left/Right Split Layout */
+    /* Center Section - Optimized Split Layout */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
@@ -248,7 +248,7 @@
       gap: 2rem;
     }
 
-    /* Left: Scaled Classic Vertical Rectangular Polaroid */
+    /* Left: Classic Rectangular Polaroid Frame */
     .center-left {
       flex: 1.1;
       display: flex;
@@ -268,7 +268,7 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      max-width: 310px; /* Enhanced size for full aesthetic look */
+      max-width: 310px;
     }
     .center-polaroid:hover {
       transform: rotate(0deg) scale(1.03);
@@ -276,7 +276,7 @@
     }
     .center-polaroid-img {
       width: 100%;
-      height: 250px; /* Classic vertical Polaroid portrait height */
+      height: 250px;
       object-fit: cover;
       object-position: 50% 50%;
       border-radius: 3px;
@@ -298,7 +298,7 @@
       margin-top: 0.2rem;
     }
 
-    /* Right: Scaled Controls & Dice */
+    /* Right: Controls & Dice */
     .center-right {
       flex: 1.3;
       display: flex;
@@ -320,7 +320,7 @@
       white-space: nowrap;
     }
 
-    /* Refined Clean 3D Cute Dice - Scaled Up */
+    /* 3D Cute Dice */
     .dice-scene {
       width: 90px;
       height: 90px;
@@ -392,7 +392,7 @@
       font-family: var(--font-family);
     }
 
-    /* High-Visibility Pawns System */
+    /* Pawns System with Step Animation */
     .pawn-container {
       position: absolute;
       bottom: 6px;
@@ -417,15 +417,15 @@
       transition: all 0.3s;
     }
     .pawn-animating {
-      animation: pawnJump 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: pawnJump 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     @keyframes pawnJump {
-      0% { transform: translateY(-30px) scale(1.6); opacity: 0.5; }
-      50% { transform: translateY(-10px) scale(1.2); }
-      100% { transform: translateY(0) scale(1); opacity: 1; }
+      0% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-22px) scale(1.35); }
+      100% { transform: translateY(0) scale(1); }
     }
 
-    /* Slide 3: Intermission - Pure Chinese Layout */
+    /* Slide 3: Intermission */
     .intermission-slide {
       display: flex;
       flex-direction: column;
@@ -480,6 +480,30 @@
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 2rem;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    /* Modal Button Group for Re-draw Feature */
+    .modal-btn-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .modal-reroll-btn {
+      background: var(--morandi-rose);
+      color: white;
+      border: none;
+      padding: 0.8rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: var(--font-family);
+      box-shadow: 0 4px 12px rgba(226, 180, 189, 0.4);
+      transition: all 0.2s;
+    }
+    .modal-reroll-btn:hover {
+      background: var(--morandi-rose-dark);
     }
     .modal-close-btn {
       background: var(--text-main);
@@ -487,6 +511,7 @@
       border: none;
       padding: 0.8rem 2rem;
       font-size: 1.1rem;
+      font-weight: 700;
       border-radius: 30px;
       cursor: pointer;
       font-family: var(--font-family);
@@ -574,10 +599,10 @@
       </div>
 
       <div class="monopoly-board" id="board">
-        <!-- Center Section - Scaled Up & Balanced Split Layout -->
+        <!-- Center Section -->
         <div class="board-center">
           
-          <!-- Left: Classic Rectangular Polaroid Frame -->
+          <!-- Left: Polaroid -->
           <div class="center-left">
             <div class="center-polaroid" onclick="document.getElementById('center-photo-uploader').click()">
               <img id="center-photo" class="center-polaroid-img" src="https://lh3.googleusercontent.com/d/1VdcImiHeczw-X-hxGd7fvn0P0XuzjCBV" alt="相框照片">
@@ -589,7 +614,7 @@
             <input type="file" id="center-photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCenterPhoto(event)">
           </div>
 
-          <!-- Right: Scaled Controls & Dice -->
+          <!-- Right: Controls & Dice -->
           <div class="center-right">
             <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
             
@@ -614,7 +639,7 @@
       </div>
     </div>
 
-    <!-- Slide 3: Intermission (Chinese Only) -->
+    <!-- Slide 3: Intermission -->
     <div class="slide slide-3">
       <div class="intermission-slide">
         <h1 class="intermission-title">中場休息</h1>
@@ -625,12 +650,15 @@
 
   </div>
 
-  <!-- Challenge Modal -->
+  <!-- Challenge Modal with Re-draw Feature -->
   <div class="modal-overlay" id="challenge-modal">
     <div class="modal-card">
       <h2 class="modal-title" id="modal-title">卡牌名稱</h2>
       <p class="modal-desc" id="modal-desc">詳細挑戰內容說明...</p>
-      <button class="modal-close-btn" onclick="closeModal()">完成關卡</button>
+      <div class="modal-btn-group">
+        <button class="modal-reroll-btn" onclick="rerollChallenge()">🎲 再抽一次</button>
+        <button class="modal-close-btn" onclick="closeModal()">完成關卡</button>
+      </div>
     </div>
   </div>
 
@@ -688,6 +716,7 @@
       { name: '第三隊', color: '#D8C3A5', icon: '♝', pos: 0 }
     ];
     let currentTeamIndex = 0;
+    let activeCellType = 'adventure';
 
     let currentTab = 'adventure';
     let cardPools = {
@@ -749,7 +778,7 @@
       slides[currentSlide].classList.add('active');
     }
 
-    // Photo Upload - Cover
+    // Photo Uploads
     function uploadCoverPhoto(event) {
       const file = event.target.files[0];
       if (file) {
@@ -761,8 +790,6 @@
         reader.readAsDataURL(file);
       }
     }
-
-    // Photo Upload - Center Polaroid
     function uploadCenterPhoto(event) {
       const file = event.target.files[0];
       if (file) {
@@ -775,7 +802,7 @@
       }
     }
 
-    // Reset All Teams to Start Position
+    // Reset Game
     function resetGame() {
       if (confirm("確定要重新開始遊戲嗎？所有隊伍將回到起點。")) {
         teams.forEach(team => team.pos = 0);
@@ -785,7 +812,7 @@
       }
     }
 
-    // Initialize Board Grid
+    // Render Board Grid
     function renderBoard() {
       const board = document.getElementById('board');
       const center = board.querySelector('.board-center');
@@ -841,7 +868,7 @@
       });
     }
 
-    // 3D Rolling Dice & Animation Sequencing
+    // Step-by-Step Rolling & Jump Animation
     let isRolling = false;
     function rollDice() {
       if (isRolling) return;
@@ -868,16 +895,25 @@
 
       cube.style.transform = `rotateX(${targetRot.x + extraX}deg) rotateY(${targetRot.y + extraY}deg)`;
 
+      // Step-by-step movement after dice stop spinning
       setTimeout(() => {
-        teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + rolled) % 14;
-        renderPawns(currentTeamIndex);
-
-        setTimeout(() => {
-          const landedCell = boardCellsData[teams[currentTeamIndex].pos];
-          triggerCellEvent(landedCell);
-          isRolling = false;
-          rollBtn.disabled = false;
-        }, 650);
+        let stepsLeft = rolled;
+        
+        const moveInterval = setInterval(() => {
+          if (stepsLeft > 0) {
+            teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + 1) % 14;
+            renderPawns(currentTeamIndex);
+            stepsLeft--;
+          } else {
+            clearInterval(moveInterval);
+            setTimeout(() => {
+              const landedCell = boardCellsData[teams[currentTeamIndex].pos];
+              triggerCellEvent(landedCell);
+              isRolling = false;
+              rollBtn.disabled = false;
+            }, 300);
+          }
+        }, 300); // 300ms delay per step
 
       }, 1000);
     }
@@ -890,15 +926,30 @@
     function triggerCellEvent(cell) {
       const modal = document.getElementById('challenge-modal');
       const title = document.getElementById('modal-title');
-      const desc = document.getElementById('modal-desc');
-
+      
+      activeCellType = cell.type;
       title.innerText = cell.label;
 
-      const pool = cardPools[cell.type] || ["🎉 祝福 Wei & Alice 新婚快樂、永浴愛河！"];
-      const randItem = pool[Math.floor(Math.random() * pool.length)];
-      desc.innerText = randItem;
-
+      drawRandomCard(cell.type);
       modal.classList.add('active');
+    }
+
+    function drawRandomCard(type) {
+      const desc = document.getElementById('modal-desc');
+      const pool = cardPools[type] || ["🎉 祝福 Wei & Alice 新婚快樂、永浴愛河！"];
+      const randItem = pool[Math.floor(Math.random() * pool.length)];
+      
+      desc.style.transform = 'scale(0.9)';
+      desc.style.opacity = '0.3';
+      setTimeout(() => {
+        desc.innerText = randItem;
+        desc.style.transform = 'scale(1)';
+        desc.style.opacity = '1';
+      }, 150);
+    }
+
+    function rerollChallenge() {
+      drawRandomCard(activeCellType);
     }
 
     function closeModal() {
