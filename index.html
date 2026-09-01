@@ -93,7 +93,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .cover-content.exit {
       opacity: 0;
@@ -147,13 +147,14 @@
       background: white;
       padding: 1.2rem 1.2rem 1.6rem 1.2rem;
       border-radius: 10px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.11), 0 2px 6px rgba(0,0,0,0.04);
       cursor: pointer;
       z-index: 100;
       display: flex;
       flex-direction: column;
       align-items: center;
       transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+      margin: 0;
     }
 
     /* State A: Cover Page Positioning */
@@ -174,10 +175,10 @@
       transition: all 0.4s ease;
     }
 
-    /* State B: Monopoly Board Positioning */
+    /* State B: Perfectly Centered in Board Left Container */
     .hero-polaroid.state-board {
-      top: 52%;
-      left: 31%;
+      top: var(--target-top, 50%);
+      left: var(--target-left, 30%);
       transform: translate(-50%, -50%) rotate(-2deg);
       width: 310px;
     }
@@ -211,6 +212,7 @@
       font-size: 1.45rem;
       font-weight: 900;
       color: var(--morandi-rose-dark);
+      letter-spacing: 0.5px;
     }
     .hero-sub {
       font-size: 0.85rem;
@@ -326,9 +328,14 @@
       gap: 2rem;
     }
 
+    /* Target Slot for Left Polaroid */
     .center-left {
       flex: 1.1;
       height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
     .center-right {
@@ -635,7 +642,7 @@
       <div class="monopoly-board" id="board">
         <!-- Center Section -->
         <div class="board-center">
-          <div class="center-left"></div>
+          <div class="center-left" id="center-left-slot"></div>
           <div class="center-right">
             <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
             
@@ -788,17 +795,31 @@
       { id: 13, label: '大冒險', icon: 'fa-fire', type: 'adventure' }
     ];
 
+    // Calculate Target Exact Center Position in Board Left Slot
+    function updateBoardTargetPosition() {
+      const slot = document.getElementById('center-left-slot');
+      if (slot) {
+        const rect = slot.getBoundingClientRect();
+        const deckRect = document.querySelector('.deck-container').getBoundingClientRect();
+        
+        const targetLeft = rect.left + rect.width / 2 - deckRect.left;
+        const targetTop = rect.top + rect.height / 2 - deckRect.top;
+
+        heroPolaroid.style.setProperty('--target-left', `${targetLeft}px`);
+        heroPolaroid.style.setProperty('--target-top', `${targetTop}px`);
+      }
+    }
+
     // Two-Stage Hero Transition to Board
     function startTransitionToBoard() {
-      // Stage 1: Exit Cover Content
       coverContent.classList.add('exit');
 
-      // Stage 2: Move Polaroid & Change Slide
       setTimeout(() => {
         slides[0].classList.remove('active');
         slides[1].classList.add('active');
         currentSlide = 1;
 
+        updateBoardTargetPosition();
         heroPolaroid.classList.remove('state-cover');
         heroPolaroid.classList.add('state-board');
       }, 400);
@@ -823,6 +844,7 @@
         heroPolaroid.className = 'hero-polaroid state-cover';
         coverContent.classList.remove('exit');
       } else if (index === 1) {
+        updateBoardTargetPosition();
         heroPolaroid.className = 'hero-polaroid state-board';
       } else {
         heroPolaroid.className = 'hero-polaroid state-hidden';
@@ -1047,13 +1069,20 @@
       document.getElementById('edit-modal').classList.remove('active');
     }
 
-    // Load saved photo on startup
+    // Load saved photo on startup & Auto Recalculate
     window.onload = function() {
       const savedPhoto = localStorage.getItem('wedding_shared_photo');
       if(savedPhoto) {
         document.getElementById('shared-photo').src = savedPhoto;
       }
       renderBoard();
+      updateBoardTargetPosition();
+    };
+
+    window.onresize = function() {
+      if (currentSlide === 1) {
+        updateBoardTargetPosition();
+      }
     };
   </script>
 </body>
