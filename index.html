@@ -26,7 +26,7 @@
       --text-muted: #8C7A6B;
       --border-color: #E6DCD0;
       --radius-lg: 20px;
-      --radius-md: 14px;
+      --radius-md: 16px;
       --shadow-soft: 0 10px 30px rgba(120, 100, 80, 0.08);
       --font-family: 'Zen Maru Gothic', 'Fredoka', sans-serif;
     }
@@ -43,7 +43,7 @@
       overflow: hidden;
     }
 
-    /* Presentation Deck Frame */
+    /* Deck Frame */
     .deck-container {
       width: 100vw;
       height: 100vh;
@@ -63,7 +63,7 @@
       flex-direction: column;
       position: absolute;
       top: 0; left: 0;
-      padding: 2.5rem 3.5rem;
+      padding: 2rem 3rem;
     }
     .slide.active { display: flex; }
 
@@ -156,7 +156,7 @@
       background: #B37B86;
     }
 
-    /* Slide 2: Monopoly Board */
+    /* Board Slide Header */
     .board-header {
       display: flex;
       justify-content: space-between;
@@ -189,19 +189,21 @@
     }
     .tool-btn:hover { background: var(--bg-cream); }
 
-    /* Monopoly Grid Layout (14 cells around) */
+    /* Monopoly Board Grid */
     .monopoly-board {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat(4, 1fr);
-      gap: 12px;
+      gap: 14px;
       flex: 1;
       position: relative;
     }
+    
+    /* Cell Design: Big Titles + High Visibility Icon */
     .cell {
       background: white;
       border-radius: var(--radius-md);
-      padding: 1rem 0.5rem;
+      padding: 1rem 0.6rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -217,25 +219,25 @@
       transform: translateY(-4px);
       border-color: var(--morandi-rose);
     }
-    
-    /* 大標題放大，超越 Icon */
+
+    .cell-icon {
+      font-size: 2.2rem;
+      color: var(--morandi-rose-dark);
+      margin-bottom: 0.5rem;
+    }
     .cell-title {
-      font-size: 1.35rem;
+      font-size: 1.55rem; /* 大標題大幅放大，超越 Icon 顯眼度 */
       font-weight: 900;
       color: var(--text-main);
-      margin-bottom: 0.4rem;
-    }
-    .cell-icon {
-      font-size: 1.1rem;
-      color: var(--text-muted);
+      line-height: 1.3;
     }
 
-    /* Board Center Area */
+    /* Center Section with 3D Cute Dice */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
-      background: rgba(255,255,255,0.75);
-      backdrop-filter: blur(10px);
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
       border-radius: var(--radius-lg);
       border: 2px dashed var(--border-color);
       display: flex;
@@ -244,45 +246,58 @@
       justify-content: center;
       padding: 1.5rem;
       position: relative;
-      perspective: 1000px;
     }
     .turn-badge {
-      font-size: 1.3rem;
-      font-weight: 700;
+      font-size: 1.4rem;
+      font-weight: 900;
       color: var(--text-main);
       background: white;
-      padding: 0.6rem 1.8rem;
+      padding: 0.6rem 2rem;
       border-radius: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      margin-bottom: 1rem;
-    }
-    
-    /* 3D 骰子動畫 */
-    .dice-box {
-      width: 95px;
-      height: 95px;
-      background: white;
-      border-radius: 22px;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.12);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 3.5rem;
-      color: var(--morandi-rose-dark);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
       margin-bottom: 1.2rem;
+    }
+
+    /* Real 3D Cute Dice Scene */
+    .dice-scene {
+      width: 90px;
+      height: 90px;
+      perspective: 600px;
+      margin-bottom: 1.5rem;
+    }
+    .cube {
+      width: 100%;
+      height: 100%;
+      position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.1s;
+      transition: transform 1s cubic-bezier(0.2, 0.8, 0.3, 1);
     }
-    .dice-rolling {
-      animation: dice3d 0.6s ease-in-out infinite;
+    .cube-face {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      background: #FFFDF9;
+      border: 3px solid #E6DCD0;
+      border-radius: 18px;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+      display: grid;
+      grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+      padding: 10px;
+      align-items: center;
+      justify-items: center;
     }
-    @keyframes dice3d {
-      0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1); }
-      25% { transform: rotateX(180deg) rotateY(90deg) rotateZ(45deg) scale(1.15); }
-      50% { transform: rotateX(360deg) rotateY(180deg) rotateZ(180deg) scale(0.9); }
-      75% { transform: rotateX(540deg) rotateY(270deg) rotateZ(225deg) scale(1.1); }
-      100% { transform: rotateX(720deg) rotateY(360deg) rotateZ(360deg) scale(1); }
+    .dot {
+      width: 14px;
+      height: 14px;
+      background-color: var(--morandi-rose-dark);
+      border-radius: 50%;
     }
+    .face-1 { transform: rotateY(0deg) translateZ(45px); }
+    .face-2 { transform: rotateY(90deg) translateZ(45px); }
+    .face-3 { transform: rotateY(180deg) translateZ(45px); }
+    .face-4 { transform: rotateY(-90deg) translateZ(45px); }
+    .face-5 { transform: rotateX(90deg) translateZ(45px); }
+    .face-6 { transform: rotateX(-90deg) translateZ(45px); }
 
     .btn-group {
       display: flex;
@@ -314,7 +329,7 @@
       font-family: var(--font-family);
     }
 
-    /* Pawns Container - 超顯眼隊伍旗子 */
+    /* Super Visible Pawns Badge System */
     .pawn-container {
       position: absolute;
       bottom: 6px;
@@ -322,24 +337,24 @@
       gap: 6px;
       flex-wrap: wrap;
       justify-content: center;
-      z-index: 10;
+      width: 100%;
+      padding: 0 4px;
     }
     .pawn {
       width: 32px;
       height: 32px;
       border-radius: 50%;
       color: white;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.25), inset 0 2px 4px rgba(255,255,255,0.4);
-      border: 2px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25), 0 0 0 2.5px white;
       font-weight: bold;
-      animation: pawnBounce 0.5s ease;
+      animation: pawnJump 0.4s ease-out;
     }
-    @keyframes pawnBounce {
-      0% { transform: translateY(-10px) scale(1.2); }
+    @keyframes pawnJump {
+      0% { transform: translateY(-15px) scale(1.3); }
       100% { transform: translateY(0) scale(1); }
     }
 
@@ -386,22 +401,14 @@
       text-align: center;
       position: relative;
     }
-    .modal-tag {
-      display: inline-block;
-      padding: 0.4rem 1.2rem;
-      border-radius: 20px;
-      color: white;
-      font-weight: 700;
-      margin-bottom: 1.2rem;
-    }
     .modal-title {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 900;
       margin-bottom: 1rem;
       color: var(--text-main);
     }
     .modal-desc {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 2rem;
@@ -498,10 +505,21 @@
       </div>
 
       <div class="monopoly-board" id="board">
-        <!-- 14 Grid Cells rendered dynamically by JS -->
+        <!-- Center Section with 3D Dice -->
         <div class="board-center">
           <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
-          <div class="dice-box" id="dice-box">🎲</div>
+          
+          <div class="dice-scene">
+            <div class="cube" id="cube">
+              <div class="cube-face face-1"><div class="dot" style="grid-area:2/2;"></div></div>
+              <div class="cube-face face-2"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+              <div class="cube-face face-3"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:2/2;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+              <div class="cube-face face-4"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+              <div class="cube-face face-5"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:2/2;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+              <div class="cube-face face-6"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:2/1;"></div><div class="dot" style="grid-area:2/3;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+            </div>
+          </div>
+
           <div class="btn-group">
             <button class="roll-btn" onclick="rollDice()">🎲 擲骰子</button>
             <button class="next-btn" onclick="nextTurn()">⏭️ 切換下一隊</button>
@@ -524,7 +542,6 @@
   <!-- Challenge Modal -->
   <div class="modal-overlay" id="challenge-modal">
     <div class="modal-card">
-      <div class="modal-tag" id="modal-tag">大冒險</div>
       <h2 class="modal-title" id="modal-title">卡牌名稱</h2>
       <p class="modal-desc" id="modal-desc">詳細挑戰內容說明...</p>
       <button class="modal-close-btn" onclick="closeModal()">完成關卡</button>
@@ -556,11 +573,11 @@
       <h2 class="modal-title" style="text-align: center;">📝 編輯各類別題目</h2>
       
       <div class="tab-header">
-        <button class="tab-btn active" onclick="switchTab('adventure')">🎭 大冒險</button>
-        <button class="tab-btn" onclick="switchTab('gift')">🎁 0元禮</button>
-        <button class="tab-btn" onclick="switchTab('chance')">✨ 機會</button>
-        <button class="tab-btn" onclick="switchTab('destiny')">🔮 命運</button>
-        <button class="tab-btn" onclick="switchTab('history')">📸 黑歷史</button>
+        <button class="tab-btn active" onclick="switchTab('adventure', event)">🎭 大冒險</button>
+        <button class="tab-btn" onclick="switchTab('gift', event)">🎁 0元禮</button>
+        <button class="tab-btn" onclick="switchTab('chance', event)">✨ 機會卡</button>
+        <button class="tab-btn" onclick="switchTab('destiny', event)">🔮 命運卡</button>
+        <button class="tab-btn" onclick="switchTab('history', event)">📸 黑歷史</button>
       </div>
 
       <div class="edit-form-group">
@@ -599,7 +616,7 @@
         "名偵探柯南麻醉槍：假裝用手錶射擊，新人瞬間沉睡癱倒。(4秒影片)"
       ],
       gift: [
-        "🎁 獲得新人深情親親臉頰 10 秒！",
+        "🎁 獲得 Alice / Wei 深情親親臉頰 10 秒！",
         "🎁 現場餵食特權：由新人現場親手餵你吃甜點蛋糕！",
         "🎁 拍立得合照：獲得與新人現場拍立得合照乙張！"
       ],
@@ -618,19 +635,19 @@
 
     const boardCellsData = [
       { id: 0, label: '起點', icon: 'fa-flag-checkered', type: 'start' },
-      { id: 1, label: '大冒險', icon: 'fa-masks-theater', type: 'adventure' },
-      { id: 2, label: '0元禮', icon: 'fa-gift', type: 'gift' },
-      { id: 3, label: '機會', icon: 'fa-wand-magic-sparkles', type: 'chance' },
-      { id: 4, label: '大冒險', icon: 'fa-bolt', type: 'adventure' },
-      { id: 5, label: '命運', icon: 'fa-crystal-ball', type: 'destiny' },
-      { id: 6, label: '黑歷史', icon: 'fa-camera-retro', type: 'history' },
-      { id: 7, label: '大冒險', icon: 'fa-clapperboard', type: 'adventure' },
-      { id: 8, label: '0元禮', icon: 'fa-heart', type: 'gift' },
-      { id: 9, label: '機會', icon: 'fa-clover', type: 'chance' },
-      { id: 10, label: '大冒險', icon: 'fa-dragon', type: 'adventure' },
-      { id: 11, label: '命運', icon: 'fa-dice-five', type: 'destiny' },
-      { id: 12, label: '黑歷史', icon: 'fa-user-ninja', type: 'history' },
-      { id: 13, label: '大冒險', icon: 'fa-fire', type: 'adventure' }
+      { id: 1, label: '爆笑大冒險', icon: 'fa-masks-theater', type: 'adventure' },
+      { id: 2, label: '現場即時好禮', icon: 'fa-gift', type: 'gift' },
+      { id: 3, label: '機會卡', icon: 'fa-wand-magic-sparkles', type: 'chance' },
+      { id: 4, label: '爆笑大冒險', icon: 'fa-bolt', type: 'adventure' },
+      { id: 5, label: '命運卡', icon: 'fa-crystal-ball', type: 'destiny' },
+      { id: 6, label: '黑歷史解密', icon: 'fa-camera-retro', type: 'history' },
+      { id: 7, label: '爆笑大冒險', icon: 'fa-clapperboard', type: 'adventure' },
+      { id: 8, label: '現場即時好禮', icon: 'fa-heart', type: 'gift' },
+      { id: 9, label: '機會卡', icon: 'fa-clover', type: 'chance' },
+      { id: 10, label: '爆笑大冒險', icon: 'fa-dragon', type: 'adventure' },
+      { id: 11, label: '命運卡', icon: 'fa-dice-five', type: 'destiny' },
+      { id: 12, label: '黑歷史解密', icon: 'fa-user-ninja', type: 'history' },
+      { id: 13, label: '爆笑大冒險', icon: 'fa-fire', type: 'adventure' }
     ];
 
     // Navigation
@@ -680,8 +697,8 @@
         cellEl.style.gridColumn = pos.c;
 
         cellEl.innerHTML = `
-          <div class="cell-title">${cellData.label}</div>
           <div class="cell-icon"><i class="fa-solid ${cellData.icon}"></i></div>
+          <div class="cell-title">${cellData.label}</div>
           <div class="pawn-container" id="pawns-cell-${idx}"></div>
         `;
 
@@ -711,28 +728,35 @@
       });
     }
 
-    // Dice & Game Mechanics with 3D Animation
+    // Real 3D Rolling Dice Logic
     function rollDice() {
-      const diceBox = document.getElementById('dice-box');
-      diceBox.classList.add('dice-rolling');
+      const cube = document.getElementById('cube');
+      const rolled = Math.floor(Math.random() * 6) + 1;
 
-      const diceEmojis = ['🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-      let animInterval = setInterval(() => {
-        diceBox.innerText = diceEmojis[Math.floor(Math.random() * 6) + 1];
-      }, 80);
+      // Calculate 3D Rotations for specific numbers
+      const rotations = {
+        1: { x: 0, y: 0 },
+        2: { x: 0, y: -90 },
+        3: { x: 0, y: -180 },
+        4: { x: 0, y: 90 },
+        5: { x: -90, y: 0 },
+        6: { x: 90, y: 0 }
+      };
+
+      const targetRot = rotations[rolled];
+      // Add extra full 720 deg spins for animation feel
+      const extraX = 720;
+      const extraY = 720;
+
+      cube.style.transform = `rotateX(${targetRot.x + extraX}deg) rotateY(${targetRot.y + extraY}deg)`;
 
       setTimeout(() => {
-        clearInterval(animInterval);
-        diceBox.classList.remove('dice-rolling');
-        const rolled = Math.floor(Math.random() * 6) + 1;
-        diceBox.innerText = diceEmojis[rolled];
-
         teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + rolled) % 14;
         renderPawns();
 
         const landedCell = boardCellsData[teams[currentTeamIndex].pos];
         setTimeout(() => triggerCellEvent(landedCell), 300);
-      }, 600);
+      }, 1000);
     }
 
     function nextTurn() {
@@ -742,11 +766,9 @@
 
     function triggerCellEvent(cell) {
       const modal = document.getElementById('challenge-modal');
-      const tag = document.getElementById('modal-tag');
       const title = document.getElementById('modal-title');
       const desc = document.getElementById('modal-desc');
 
-      tag.innerText = cell.label;
       title.innerText = cell.label;
 
       const pool = cardPools[cell.type] || ["🎉 祝福 Wei & Alice 新婚快樂、永浴愛河！"];
@@ -798,10 +820,12 @@
       switchTab('adventure');
       document.getElementById('edit-modal').classList.add('active');
     }
-    function switchTab(tabKey) {
+    function switchTab(tabKey, evt) {
       currentTab = tabKey;
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
+      if(evt) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        evt.target.classList.add('active');
+      }
       document.getElementById('category-input').value = (cardPools[tabKey] || []).join('\n');
     }
     function saveCategoryQuestions() {
