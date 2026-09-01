@@ -225,13 +225,13 @@
       margin-bottom: 0.5rem;
     }
     .cell-title {
-      font-size: 1.6rem; /* 超大標題，極佳遠距離視覺感 */
+      font-size: 1.6rem;
       font-weight: 900;
       color: var(--text-main);
       line-height: 1.3;
     }
 
-    /* Center Section with Ultra Realistic 3D Cute Dice */
+    /* Center Section */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
@@ -257,11 +257,11 @@
       margin-bottom: 1.2rem;
     }
 
-    /* Enhanced 3D Cute Realistic Dice Scene */
+    /* Refined Clean 3D Cute Dice */
     .dice-scene {
-      width: 95px;
-      height: 95px;
-      perspective: 800px;
+      width: 90px;
+      height: 90px;
+      perspective: 600px;
       margin-bottom: 1.5rem;
     }
     .cube {
@@ -273,31 +273,31 @@
     }
     .cube-face {
       position: absolute;
-      width: 95px;
-      height: 95px;
-      background: linear-gradient(145deg, #FFFFFF, #F2EBE1);
-      border: 3.5px solid #E2D7C8;
-      border-radius: 22px;
-      box-shadow: inset 0 3px 8px rgba(255,255,255,0.8), inset 0 -3px 8px rgba(0,0,0,0.08), 0 8px 18px rgba(0,0,0,0.12);
+      width: 90px;
+      height: 90px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: inset 0 0 0 2px #E6DCD0, inset 0 -3px 6px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.08);
       display: grid;
       grid-template: repeat(3, 1fr) / repeat(3, 1fr);
       padding: 12px;
       align-items: center;
       justify-items: center;
+      backface-visibility: hidden;
     }
     .dot {
       width: 15px;
       height: 15px;
-      background: radial-gradient(circle at 30% 30%, #D88E9E, #C48B96);
+      background: var(--morandi-rose-dark);
       border-radius: 50%;
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
     }
-    .face-1 { transform: rotateY(0deg) translateZ(47.5px); }
-    .face-2 { transform: rotateY(90deg) translateZ(47.5px); }
-    .face-3 { transform: rotateY(180deg) translateZ(47.5px); }
-    .face-4 { transform: rotateY(-90deg) translateZ(47.5px); }
-    .face-5 { transform: rotateX(90deg) translateZ(47.5px); }
-    .face-6 { transform: rotateX(-90deg) translateZ(47.5px); }
+    .face-1 { transform: rotateY(0deg) translateZ(45px); }
+    .face-2 { transform: rotateY(90deg) translateZ(45px); }
+    .face-3 { transform: rotateY(180deg) translateZ(45px); }
+    .face-4 { transform: rotateY(-90deg) translateZ(45px); }
+    .face-5 { transform: rotateX(90deg) translateZ(45px); }
+    .face-6 { transform: rotateX(-90deg) translateZ(45px); }
 
     .btn-group {
       display: flex;
@@ -501,6 +501,7 @@
           <span>我們的專屬大富翁</span>
         </div>
         <div class="header-controls">
+          <button class="tool-btn" onclick="resetGame()"><i class="fa-solid fa-rotate-left"></i> 重新開始</button>
           <button class="tool-btn" onclick="goToSlide(0)"><i class="fa-solid fa-house"></i> 返回首頁</button>
           <button class="tool-btn" onclick="openSetupModal()"><i class="fa-solid fa-users"></i> 隊伍設定</button>
           <button class="tool-btn" onclick="openEditModal()"><i class="fa-solid fa-pen"></i> 編輯題目</button>
@@ -526,7 +527,7 @@
 
           <div class="btn-group">
             <button class="roll-btn" id="roll-btn" onclick="rollDice()">🎲 擲骰子</button>
-            <button class="next-btn" onclick="nextTurn()">⏭️ 切換下一隊</button>
+            <button class="next-btn" onclick="nextTurn()">下一隊</button>
           </div>
         </div>
       </div>
@@ -646,11 +647,11 @@
       { id: 4, label: '大冒險', icon: 'fa-bolt', type: 'adventure' },
       { id: 5, label: '命運', icon: 'fa-crystal-ball', type: 'destiny' },
       { id: 6, label: '真心話', icon: 'fa-comments', type: 'truth' },
-      { id: 7, label: '大冒險', label: '大冒險', icon: 'fa-clapperboard', type: 'adventure' },
+      { id: 7, label: '大冒險', icon: 'fa-clapperboard', type: 'adventure' },
       { id: 8, label: '小驚喜', icon: 'fa-heart', type: 'gift' },
       { id: 9, label: '機會', icon: 'fa-clover', type: 'chance' },
       { id: 10, label: '大冒險', icon: 'fa-dragon', type: 'adventure' },
-      { id: 11, label: '命運', icon: 'fa-dice-five', type: 'destiny' },
+      { id: 11, label: '命運', icon: 'fa-crystal-ball', type: 'destiny' },
       { id: 12, label: '真心話', icon: 'fa-comment-dots', type: 'truth' },
       { id: 13, label: '大冒險', icon: 'fa-fire', type: 'adventure' }
     ];
@@ -677,6 +678,16 @@
           localStorage.setItem('wedding_cover_photo', e.target.result);
         };
         reader.readAsDataURL(file);
+      }
+    }
+
+    // Reset All Teams to Start Position
+    function resetGame() {
+      if (confirm("確定要重新開始遊戲嗎？所有隊伍將回到起點。")) {
+        teams.forEach(team => team.pos = 0);
+        currentTeamIndex = 0;
+        document.getElementById('turn-display').innerText = `${teams[0].icon} 輪到：${teams[0].name}`;
+        renderPawns();
       }
     }
 
@@ -736,7 +747,7 @@
       });
     }
 
-    // Ultra-Realistic 3D Rolling Dice & Perfect Animation Sequencing
+    // 3D Rolling Dice & Animation Sequencing
     let isRolling = false;
     function rollDice() {
       if (isRolling) return;
@@ -748,7 +759,6 @@
 
       const rolled = Math.floor(Math.random() * 6) + 1;
 
-      // Rotations mapping for precise 3D face alignment
       const rotations = {
         1: { x: 0, y: 0 },
         2: { x: 0, y: -90 },
@@ -759,21 +769,15 @@
       };
 
       const targetRot = rotations[rolled];
-      // Multi-axis rotations for extra realistic rolling trajectory
       const extraX = 1080;
       const extraY = 720;
 
       cube.style.transform = `rotateX(${targetRot.x + extraX}deg) rotateY(${targetRot.y + extraY}deg)`;
 
-      // Step 1: Wait for 3D Dice to finish rolling (1s)
       setTimeout(() => {
-        // Update current team position
         teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + rolled) % 14;
-        
-        // Step 2: Render Pawns and trigger Pawn Jump Pulse Animation (0.6s)
         renderPawns(currentTeamIndex);
 
-        // Step 3: Wait for Pawn Jump animation to complete before showing Modal
         setTimeout(() => {
           const landedCell = boardCellsData[teams[currentTeamIndex].pos];
           triggerCellEvent(landedCell);
