@@ -231,99 +231,101 @@
       line-height: 1.3;
     }
 
-    /* Center Section - Left/Right Split Layout */
+    /* Center Section - Optimized Filled Left/Right Split Layout */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(12px);
       border-radius: var(--radius-lg);
       border: 2px dashed var(--border-color);
       display: flex;
       flex-direction: row;
       align-items: center;
-      justify-content: space-around;
-      padding: 1rem 2rem;
+      justify-content: space-evenly;
+      padding: 1.2rem 2.5rem;
       position: relative;
-      gap: 1.5rem;
+      gap: 2rem;
     }
 
-    /* Left: Polaroid Frame */
+    /* Left: Scaled Classic Vertical Rectangular Polaroid */
     .center-left {
-      flex: 1;
+      flex: 1.1;
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100%;
     }
     .center-polaroid {
       background: white;
-      padding: 0.8rem 0.8rem 1rem 0.8rem;
-      border-radius: 10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      padding: 1.2rem 1.2rem 1.6rem 1.2rem;
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.11), 0 2px 6px rgba(0,0,0,0.04);
       transform: rotate(-2deg);
       cursor: pointer;
       transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 240px;
       width: 100%;
+      max-width: 310px; /* Enhanced size for full aesthetic look */
     }
     .center-polaroid:hover {
       transform: rotate(0deg) scale(1.03);
-      box-shadow: 0 12px 25px rgba(0,0,0,0.12);
+      box-shadow: 0 16px 35px rgba(0,0,0,0.15);
     }
     .center-polaroid-img {
       width: 100%;
-      height: 160px;
+      height: 250px; /* Classic vertical Polaroid portrait height */
       object-fit: cover;
       object-position: 50% 50%;
-      border-radius: 4px;
+      border-radius: 3px;
     }
     .center-polaroid-footer {
-      margin-top: 0.5rem;
+      margin-top: 1rem;
       text-align: center;
     }
     .center-polaroid-names {
-      font-size: 1.15rem;
+      font-size: 1.45rem;
       font-weight: 900;
       color: var(--morandi-rose-dark);
+      letter-spacing: 0.5px;
     }
     .center-polaroid-sub {
-      font-size: 0.7rem;
+      font-size: 0.85rem;
       font-style: italic;
       color: var(--text-muted);
-      margin-top: 0.1rem;
+      margin-top: 0.2rem;
     }
 
-    /* Right: Controls & Dice */
+    /* Right: Scaled Controls & Dice */
     .center-right {
-      flex: 1.2;
+      flex: 1.3;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 1.2rem;
     }
 
     .turn-badge {
-      font-size: 1.2rem;
+      font-size: 1.45rem;
       font-weight: 900;
       color: var(--text-main);
       background: white;
-      padding: 0.4rem 1.4rem;
+      padding: 0.55rem 1.8rem;
       border-radius: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border: 1.5px solid var(--border-color);
       white-space: nowrap;
     }
 
-    /* Refined Clean 3D Cute Dice */
+    /* Refined Clean 3D Cute Dice - Scaled Up */
     .dice-scene {
-      width: 70px;
-      height: 70px;
+      width: 90px;
+      height: 90px;
       perspective: 600px;
-      margin: 0.1rem 0;
+      margin: 0.2rem 0;
     }
     .cube {
       width: 100%;
@@ -334,42 +336,42 @@
     }
     .cube-face {
       position: absolute;
-      width: 70px;
-      height: 70px;
+      width: 90px;
+      height: 90px;
       background: #FFFFFF;
-      border-radius: 14px;
-      box-shadow: inset 0 0 0 2px #E6DCD0, inset 0 -3px 6px rgba(0,0,0,0.05), 0 8px 16px rgba(0,0,0,0.08);
+      border-radius: 18px;
+      box-shadow: inset 0 0 0 2px #E6DCD0, inset 0 -4px 8px rgba(0,0,0,0.05), 0 10px 20px rgba(0,0,0,0.09);
       display: grid;
       grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-      padding: 8px;
+      padding: 11px;
       align-items: center;
       justify-items: center;
       backface-visibility: hidden;
     }
     .dot {
-      width: 11px;
-      height: 11px;
+      width: 14px;
+      height: 14px;
       background: var(--morandi-rose-dark);
       border-radius: 50%;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
     }
-    .face-1 { transform: rotateY(0deg) translateZ(35px); }
-    .face-2 { transform: rotateY(90deg) translateZ(35px); }
-    .face-3 { transform: rotateY(180deg) translateZ(35px); }
-    .face-4 { transform: rotateY(-90deg) translateZ(35px); }
-    .face-5 { transform: rotateX(90deg) translateZ(35px); }
-    .face-6 { transform: rotateX(-90deg) translateZ(35px); }
+    .face-1 { transform: rotateY(0deg) translateZ(45px); }
+    .face-2 { transform: rotateY(90deg) translateZ(45px); }
+    .face-3 { transform: rotateY(180deg) translateZ(45px); }
+    .face-4 { transform: rotateY(-90deg) translateZ(45px); }
+    .face-5 { transform: rotateX(90deg) translateZ(45px); }
+    .face-6 { transform: rotateX(-90deg) translateZ(45px); }
 
     .btn-group {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.8rem;
     }
     .roll-btn {
       background: var(--morandi-rose-dark);
       color: white;
       border: none;
-      padding: 0.7rem 1.6rem;
-      font-size: 1.1rem;
+      padding: 0.85rem 2rem;
+      font-size: 1.3rem;
       font-weight: 700;
       border-radius: 40px;
       cursor: pointer;
@@ -382,8 +384,8 @@
       background: var(--text-main);
       color: white;
       border: none;
-      padding: 0.7rem 1.3rem;
-      font-size: 1rem;
+      padding: 0.85rem 1.6rem;
+      font-size: 1.15rem;
       font-weight: 700;
       border-radius: 40px;
       cursor: pointer;
@@ -423,7 +425,7 @@
       100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    /* Slide 3: Intermission */
+    /* Slide 3: Intermission - Pure Chinese Layout */
     .intermission-slide {
       display: flex;
       flex-direction: column;
@@ -433,15 +435,16 @@
       height: 100%;
     }
     .intermission-title {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: 900;
       color: var(--text-main);
       margin-bottom: 1.5rem;
+      letter-spacing: 2px;
     }
     .intermission-sub {
-      font-size: 1.8rem;
+      font-size: 1.9rem;
       color: var(--text-muted);
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
     }
 
     /* Modal Styling */
@@ -571,10 +574,10 @@
       </div>
 
       <div class="monopoly-board" id="board">
-        <!-- Center Section - Left/Right Split Layout -->
+        <!-- Center Section - Scaled Up & Balanced Split Layout -->
         <div class="board-center">
           
-          <!-- Left: Polaroid -->
+          <!-- Left: Classic Rectangular Polaroid Frame -->
           <div class="center-left">
             <div class="center-polaroid" onclick="document.getElementById('center-photo-uploader').click()">
               <img id="center-photo" class="center-polaroid-img" src="https://lh3.googleusercontent.com/d/1VdcImiHeczw-X-hxGd7fvn0P0XuzjCBV" alt="相框照片">
@@ -586,7 +589,7 @@
             <input type="file" id="center-photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCenterPhoto(event)">
           </div>
 
-          <!-- Right: Controls & Dice -->
+          <!-- Right: Scaled Controls & Dice -->
           <div class="center-right">
             <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
             
@@ -611,10 +614,10 @@
       </div>
     </div>
 
-    <!-- Slide 3: Intermission -->
+    <!-- Slide 3: Intermission (Chinese Only) -->
     <div class="slide slide-3">
       <div class="intermission-slide">
-        <h1 class="intermission-title">Intermission 中場休息</h1>
+        <h1 class="intermission-title">中場休息</h1>
         <p class="intermission-sub">敬酒、合照、享用美食與美酒 🥂</p>
         <button class="start-btn" onclick="goToSlide(1)">↩️ 返回大富翁遊戲</button>
       </div>
