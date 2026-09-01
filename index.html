@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我們的專屬大富翁 - 俊維 ❤️ 儷庭 Afterparty</title>
+  <!-- Google Fonts: Zen Maru Gothic (日系圓體) + Fredoka (可愛圓體) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-all/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-cream: #F9F6F0;
+      --card-bg: #FFFFFF;
+      --morandi-rose: #E2B4BD;
+      --morandi-rose-dark: #C48B96;
+      --morandi-sage: #A7B8A0;
+      --morandi-sand: #D8C3A5;
+      --morandi-blue: #9BB7D4;
+      --morandi-purple: #B5A7C9;
+      --morandi-terracotta: #D98A72;
+      --text-main: #4A403A;
+      --text-muted: #8C7A6B;
+      --border-color: #E6DCD0;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --shadow-soft: 0 10px 30px rgba(120, 100, 80, 0.08);
+      --font-family: 'Zen Maru Gothic', 'Fredoka', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-family);
+      background-color: #ECE5DC;
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Presentation Deck Frame */
+    .deck-container {
+      width: 100vw;
+      height: 100vh;
+      max-width: 1920px;
+      max-height: 1080px;
+      background-color: var(--bg-cream);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 0; left: 0;
+      padding: 2.5rem 3.5rem;
+    }
+    .slide.active { display: flex; }
+
+    /* Slide 1: Cover */
+    .cover-slide {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 4rem;
+    }
+    .cover-photo-wrapper {
+      flex: 1;
+      height: 80%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .polaroid-frame {
+      background: white;
+      padding: 1.5rem 1.5rem 3.5rem 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+      transform: rotate(-3deg);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      max-width: 480px;
+      width: 100%;
+    }
+    .polaroid-frame:hover {
+      transform: rotate(0deg) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .polaroid-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      object-position: 50% 98%;
+      border-radius: 6px;
+      filter: grayscale(80%) contrast(120%) sepia(20%);
+    }
+    .polaroid-hint {
+      position: absolute;
+      bottom: 1.2rem;
+      width: 100%;
+      left: 0;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    .cover-content {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .badge {
+      background-color: var(--morandi-rose);
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+    }
+    .cover-title {
+      font-size: 4.2rem;
+      font-weight: 900;
+      color: var(--text-main);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .names-tag {
+      font-size: 2rem;
+      color: var(--morandi-rose-dark);
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+    }
+    .start-btn {
+      background: var(--morandi-rose-dark);
+      color: white;
+      border: none;
+      padding: 1.2rem 3rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(196, 139, 150, 0.4);
+      transition: all 0.2s ease;
+      font-family: var(--font-family);
+    }
+    .start-btn:hover {
+      transform: translateY(-3px);
+      background: #B37B86;
+    }
+
+    /* Slide 2: Monopoly Board */
+    .board-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .header-title {
+      font-size: 1.8rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .header-title i { color: var(--morandi-rose-dark); }
+    .header-controls {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .tool-btn {
+      background: white;
+      border: 1.5px solid var(--border-color);
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      cursor: pointer;
+      font-family: var(--font-family);
+      transition: all 0.2s;
+    }
+    .tool-btn:hover { background: var(--bg-cream); }
+
+    /* Monopoly Grid Layout (14 cells around) */
+    .monopoly-board {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 12px;
+      flex: 1;
+      position: relative;
+    }
+    .cell {
+      background: white;
+      border-radius: var(--radius-md);
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: var(--shadow-soft);
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .cell:hover {
+      transform: translateY(-4px);
+      border-color: var(--morandi-rose);
+    }
+    .cell-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.6rem;
+      border-radius: 12px;
+      color: white;
+      margin-bottom: 0.4rem;
+    }
+    .tag-adventure { background: var(--morandi-rose-dark); }
+    .tag-gift { background: var(--morandi-sage); }
+    .tag-chance { background: var(--morandi-sand); }
+    .tag-destiny { background: var(--morandi-purple); }
+    .tag-history { background: var(--morandi-terracotta); }
+    .tag-start { background: var(--morandi-blue); }
+
+    .cell-icon {
+      font-size: 1.8rem;
+      color: var(--text-main);
+      margin: 0.2rem 0;
+    }
+    .cell-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    /* Board Center Area */
+    .board-center {
+      grid-column: 2 / 5;
+      grid-row: 2 / 4;
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+      border: 2px dashed var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      position: relative;
+    }
+    .turn-badge {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      background: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+    }
+    .dice-box {
+      width: 90px;
+      height: 90px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+      color: var(--morandi-rose-dark);
+      margin-bottom: 1.2rem;
+      transition: transform 0.1s;
+    }
+    .dice-shake {
+      animation: shake 0.5s infinite;
+    }
+    @keyframes shake {
+      0% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(15deg) scale(1.1); }
+      50% { transform: rotate(-15deg) scale(1.1); }
+      75% { transform: rotate(10deg) scale(1.05); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+    .roll-btn {
+      background: var(--morandi-rose-dark);
+      color: white;
+      border: none;
+      padding: 0.9rem 2.5rem;
+      font-size: 1.3rem;
+      font-weight: 700;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(196, 139, 150, 0.3);
+      font-family: var(--font-family);
+    }
+    .roll-btn:hover { background: #B37B86; }
+
+    /* Pawns Container inside Cells */
+    .pawn-container {
+      position: absolute;
+      bottom: 4px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pawn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      color: white;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      font-weight: bold;
+    }
+
+    /* Slide 3: Intermission */
+    .intermission-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      height: 100%;
+    }
+    .intermission-title {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+    }
+    .intermission-sub {
+      font-size: 1.8rem;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+    }
+
+    /* Modal Styling */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(74, 64, 58, 0.4);
+      backdrop-filter: blur(6px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      max-width: 550px;
+      width: 90%;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      text-align: center;
+      position: relative;
+    }
+    .modal-tag {
+      display: inline-block;
+      padding: 0.4rem 1.2rem;
+      border-radius: 20px;
+      color: white;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+    .modal-title {
+      font-size: 2rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+    .modal-desc {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+    .modal-close-btn {
+      background: var(--text-main);
+      color: white;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: var(--font-family);
+    }
+
+    /* Edit Questions Form */
+    .edit-form-group {
+      text-align: left;
+      margin-bottom: 1rem;
+    }
+    .edit-form-group label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .edit-form-group textarea, .edit-form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+    }
+    .hidden-input { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container">
+
+    <!-- Slide 1: Cover -->
+    <div class="slide slide-1 active">
+      <div class="cover-slide">
+        <div class="cover-photo-wrapper">
+          <div class="polaroid-frame" onclick="document.getElementById('photo-uploader').click()">
+            <img id="cover-photo" class="polaroid-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="婚紗照">
+            <div class="polaroid-hint">📷 點擊替換婚紗照</div>
+          </div>
+          <input type="file" id="photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCoverPhoto(event)">
+        </div>
+        <div class="cover-content">
+          <div class="badge">WEDDING AFTERPARTY</div>
+          <h1 class="cover-title">我們的專屬大富翁</h1>
+          <div class="names-tag">Jun-Wei ❤️ Li-Ting</div>
+          <button class="start-btn" onclick="nextSlide()">開啟大富翁 ➔</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Monopoly Board -->
+    <div class="slide slide-2">
+      <div class="board-header">
+        <div class="header-title">
+          <i class="fa-solid fa-heart"></i>
+          <span>我們的專屬大富翁</span>
+        </div>
+        <div class="header-controls">
+          <button class="tool-btn" onclick="openSetupModal()"><i class="fa-solid fa-users"></i> 隊伍設定</button>
+          <button class="tool-btn" onclick="openEditModal()"><i class="fa-solid fa-pen"></i> 編輯題目</button>
+          <button class="tool-btn" onclick="nextSlide()"><i class="fa-solid fa-glass-cheers"></i> 中場休息</button>
+        </div>
+      </div>
+
+      <div class="monopoly-board" id="board">
+        <!-- 14 Grid Cells rendered dynamically by JS -->
+        <div class="board-center">
+          <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
+          <div class="dice-box" id="dice-box">🎲</div>
+          <button class="roll-btn" onclick="rollDice()">🎲 擲骰移動</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Intermission -->
+    <div class="slide slide-3">
+      <div class="intermission-slide">
+        <h1 class="intermission-title">Intermission 中場休息</h1>
+        <p class="intermission-sub">敬酒、合照、享用美食與美酒 🥂</p>
+        <button class="start-btn" onclick="goToSlide(1)">↩️ 返回大富翁遊戲</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Challenge Modal -->
+  <div class="modal-overlay" id="challenge-modal">
+    <div class="modal-card">
+      <div class="modal-tag" id="modal-tag">爆笑大冒險</div>
+      <h2 class="modal-title" id="modal-title">卡牌名稱</h2>
+      <p class="modal-desc" id="modal-desc">詳細挑戰內容說明...</p>
+      <button class="modal-close-btn" onclick="closeModal()">完成關卡</button>
+    </div>
+  </div>
+
+  <!-- Setup Modal -->
+  <div class="modal-overlay" id="setup-modal">
+    <div class="modal-card">
+      <h2 class="modal-title">⚙️ 隊伍設定</h2>
+      <div class="edit-form-group">
+        <label>選擇隊伍數量：</label>
+        <select id="team-count-select" onchange="updateTeamInputs()" style="width:100%; padding:0.8rem; border-radius:10px; border:1.5px solid var(--border-color); font-family:var(--font-family);">
+          <option value="2">2 組隊伍</option>
+          <option value="3" selected>3 組隊伍</option>
+          <option value="4">4 組隊伍</option>
+          <option value="5">5 組隊伍</option>
+          <option value="6">6 組隊伍</option>
+        </select>
+      </div>
+      <div id="team-inputs-container"></div>
+      <button class="modal-close-btn" onclick="saveTeamSetup()">儲存設定</button>
+    </div>
+  </div>
+
+  <!-- Edit Questions Modal -->
+  <div class="modal-overlay" id="edit-modal">
+    <div class="modal-card" style="max-width: 650px; text-align: left;">
+      <h2 class="modal-title" style="text-align: center;">📝 編輯大冒險題目</h2>
+      <div class="edit-form-group">
+        <label>新增/自訂大冒險（每行一個題目）：</label>
+        <textarea id="adventure-list-input" rows="8"></textarea>
+      </div>
+      <div style="text-align: center;">
+        <button class="modal-close-btn" onclick="saveQuestions()">儲存題目</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State Management
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    let teams = [
+      { name: '第一隊', color: '#E2B4BD', icon: '♟️', pos: 0 },
+      { name: '第二隊', color: '#A7B8A0', icon: '♞', pos: 0 },
+      { name: '第三隊', color: '#D8C3A5', icon: '♝', pos: 0 }
+    ];
+    let currentTeamIndex = 0;
+
+    let adventures = [
+      "鋼鐵人彈指 (Snap!)：戴上手套喊「I am Iron man」，新人配合演出倒下。(4秒影片)",
+      "神奇寶貝大師：對新人丟精靈球喊「決定就是你了！」，新人擺出收服姿勢。(定格拍照)",
+      "蜘蛛人對決：與新人同時半蹲擺出雙手吐絲姿勢互瞪。(定格拍照)",
+      "奧德修斯神弓：拉開隱形大弓瞄準新人，新人配合誇張後仰。(定格拍照)",
+      "咒術迴戰領域展開：雙手結印喊「無量空處」，新人做出當機表情。(定格拍照)",
+      "芙莉蓮飛吻暴擊：對新人送出飛吻，新人模仿勇者倒下。(4秒影片)",
+      "間諜家家酒安妮亞：雙手抱胸，對著鏡頭做出鄙視表情。(定格拍照)",
+      "名偵探柯南麻醉槍：假裝用手錶射擊，新人瞬間沉睡癱倒。(4秒影片)"
+    ];
+
+    const boardCellsData = [
+      { id: 0, tag: 'START', label: '起點', icon: 'fa-flag-checkered', type: 'start' },
+      { id: 1, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-masks-theater', type: 'adventure' },
+      { id: 2, tag: '0元禮', label: '現場即時好禮', icon: 'fa-gift', type: 'gift' },
+      { id: 3, tag: '機會', label: '機會卡', icon: 'fa-wand-magic-sparkles', type: 'chance' },
+      { id: 4, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-bolt', type: 'adventure' },
+      { id: 5, tag: '命運', label: '命運卡', icon: 'fa-crystal-ball', type: 'destiny' },
+      { id: 6, tag: '黑歷史', label: '黑歷史解密', icon: 'fa-camera-retro', type: 'history' },
+      { id: 7, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-clapperboard', type: 'adventure' },
+      { id: 8, tag: '0元禮', label: '現場即時好禮', icon: 'fa-heart', type: 'gift' },
+      { id: 9, tag: '機會', label: '機會卡', icon: 'fa-clover', type: 'chance' },
+      { id: 10, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-dragon', type: 'adventure' },
+      { id: 11, tag: '命運', label: '命運卡', icon: 'fa-dice-five', type: 'destiny' },
+      { id: 12, tag: '黑歷史', label: '黑歷史解密', icon: 'fa-user-ninja', type: 'history' },
+      { id: 13, tag: '大冒險', label: '爆笑大冒險', icon: 'fa-fire', type: 'adventure' }
+    ];
+
+    // Navigation
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = index;
+      slides[currentSlide].classList.add('active');
+    }
+
+    // Photo Upload
+    function uploadCoverPhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          document.getElementById('cover-photo').src = e.target.result;
+          localStorage.setItem('wedding_cover_photo', e.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Initialize Board Grid
+    function renderBoard() {
+      const board = document.getElementById('board');
+      // Clear previous cells except center
+      const center = board.querySelector('.board-center');
+      board.innerHTML = '';
+      board.appendChild(center);
+
+      // Grid positions around the 5x4 matrix
+      const positions = [
+        {r:1, c:1}, {r:1, c:2}, {r:1, c:3}, {r:1, c:4}, {r:1, c:5},
+        {r:2, c:5}, {r:3, c:5}, {r:4, c:5},
+        {r:4, c:4}, {r:4, c:3}, {r:4, c:2}, {r:4, c:1},
+        {r:3, c:1}, {r:2, c:1}
+      ];
+
+      boardCellsData.forEach((cellData, idx) => {
+        const pos = positions[idx];
+        const cellEl = document.createElement('div');
+        cellEl.className = 'cell';
+        cellEl.style.gridRow = pos.r;
+        cellEl.style.gridColumn = pos.c;
+
+        let tagClass = 'tag-adventure';
+        if(cellData.type === 'gift') tagClass = 'tag-gift';
+        if(cellData.type === 'chance') tagClass = 'tag-chance';
+        if(cellData.type === 'destiny') tagClass = 'tag-destiny';
+        if(cellData.type === 'history') tagClass = 'tag-history';
+        if(cellData.type === 'start') tagClass = 'tag-start';
+
+        cellEl.innerHTML = `
+          <div class="cell-tag ${tagClass}">${cellData.tag}</div>
+          <div class="cell-icon"><i class="fa-solid ${cellData.icon}"></i></div>
+          <div class="cell-title">${cellData.label}</div>
+          <div class="pawn-container" id="pawns-cell-${idx}"></div>
+        `;
+
+        cellEl.onclick = () => triggerCellEvent(cellData);
+        board.appendChild(cellEl);
+      });
+
+      renderPawns();
+    }
+
+    function renderPawns() {
+      // Clear all pawns
+      boardCellsData.forEach((_, idx) => {
+        const container = document.getElementById(`pawns-cell-${idx}`);
+        if(container) container.innerHTML = '';
+      });
+
+      // Append pawns
+      teams.forEach((team) => {
+        const container = document.getElementById(`pawns-cell-${team.pos}`);
+        if(container) {
+          const pawnEl = document.createElement('div');
+          pawnEl.className = 'pawn';
+          pawnEl.style.backgroundColor = team.color;
+          pawnEl.innerText = team.icon;
+          pawnEl.title = team.name;
+          container.appendChild(pawnEl);
+        }
+      });
+    }
+
+    // Dice & Game Mechanics
+    function rollDice() {
+      const diceBox = document.getElementById('dice-box');
+      diceBox.classList.add('dice-shake');
+
+      setTimeout(() => {
+        diceBox.classList.remove('dice-shake');
+        const rolled = Math.floor(Math.random() * 6) + 1;
+        diceBox.innerText = rolled;
+
+        // Move current team
+        teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + rolled) % 14;
+        renderPawns();
+
+        // Trigger Event
+        const landedCell = boardCellsData[teams[currentTeamIndex].pos];
+        setTimeout(() => triggerCellEvent(landedCell), 300);
+
+        // Advance Turn
+        currentTeamIndex = (currentTeamIndex + 1) % teams.length;
+        document.getElementById('turn-display').innerText = `${teams[currentTeamIndex].icon} 輪到：${teams[currentTeamIndex].name}`;
+      }, 500);
+    }
+
+    function triggerCellEvent(cell) {
+      const modal = document.getElementById('challenge-modal');
+      const tag = document.getElementById('modal-tag');
+      const title = document.getElementById('modal-title');
+      const desc = document.getElementById('modal-desc');
+
+      tag.innerText = cell.tag;
+      title.innerText = cell.label;
+
+      if(cell.type === 'adventure') {
+        const randAdv = adventures[Math.floor(Math.random() * adventures.length)];
+        desc.innerText = randAdv;
+      } else if(cell.type === 'gift') {
+        desc.innerText = "🎁 獲得 0 元現場驚喜好禮！獲得新人深情親親 10 秒或現場手餵甜點特權乙次！";
+      } else if(cell.type === 'chance') {
+        desc.innerText = "✨ 機會卡：指定現場一位伴郎/伴娘代表替你執行下一次大冒險！";
+      } else if(cell.type === 'destiny') {
+        desc.innerText = "🔮 命運卡：現場真心話大冒險，回答俊維或儷庭一個熱門八卦問題！";
+      } else if(cell.type === 'history') {
+        desc.innerText = "📸 黑歷史解密：大螢幕公開一張昔日搞笑舊照，需重現照片中的誇張姿勢！";
+      } else {
+        desc.innerText = "🎉 起點：全場所有人一起乾杯！祝福俊維與儷庭新婚快樂！";
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('challenge-modal').classList.remove('active');
+    }
+
+    // Setup & Edit Modals
+    function openSetupModal() {
+      document.getElementById('setup-modal').classList.add('active');
+      updateTeamInputs();
+    }
+    function updateTeamInputs() {
+      const count = parseInt(document.getElementById('team-count-select').value);
+      const container = document.getElementById('team-inputs-container');
+      container.innerHTML = '';
+      for(let i = 0; i < count; i++) {
+        const name = teams[i] ? teams[i].name : `第 ${i+1} 隊`;
+        container.innerHTML += `
+          <div class="edit-form-group">
+            <label>隊伍 ${i+1} 名稱：</label>
+            <input type="text" id="team-name-${i}" value="${name}">
+          </div>
+        `;
+      }
+    }
+    function saveTeamSetup() {
+      const count = parseInt(document.getElementById('team-count-select').value);
+      const colors = ['#E2B4BD', '#A7B8A0', '#D8C3A5', '#B5A7C9', '#9BB7D4', '#D98A72'];
+      const icons = ['♟️', '♞', '♝', '♛', '♚', '♜'];
+      teams = [];
+      for(let i = 0; i < count; i++) {
+        const name = document.getElementById(`team-name-${i}`).value || `第 ${i+1} 隊`;
+        teams.push({ name, color: colors[i], icon: icons[i], pos: 0 });
+      }
+      currentTeamIndex = 0;
+      document.getElementById('turn-display').innerText = `${teams[0].icon} 輪到：${teams[0].name}`;
+      document.getElementById('setup-modal').classList.remove('active');
+      renderPawns();
+    }
+
+    function openEditModal() {
+      document.getElementById('adventure-list-input').value = adventures.join('\n');
+      document.getElementById('edit-modal').classList.add('active');
+    }
+    function saveQuestions() {
+      const text = document.getElementById('adventure-list-input').value;
+      adventures = text.split('\n').filter(line => line.trim() !== '');
+      document.getElementById('edit-modal').classList.remove('active');
+    }
+
+    // Load saved photo on startup
+    window.onload = function() {
+      const savedPhoto = localStorage.getItem('wedding_cover_photo');
+      if(savedPhoto) {
+        document.getElementById('cover-photo').src = savedPhoto;
+      }
+      renderBoard();
+    };
+  </script>
+</body>
+</html>
