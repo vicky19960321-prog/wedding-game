@@ -65,10 +65,9 @@
       position: absolute;
       top: 0; left: 0;
       padding: 2rem 3rem;
-      opacity: 1;
-      transition: opacity 0.5s ease;
+      z-index: 1;
     }
-    .slide.active { display: flex; }
+    .slide.active { display: flex; z-index: 2; }
 
     /* Slide 1: Cover */
     .cover-slide {
@@ -149,7 +148,7 @@
       border-radius: 10px;
       box-shadow: 0 12px 30px rgba(0,0,0,0.11), 0 2px 6px rgba(0,0,0,0.04);
       cursor: pointer;
-      z-index: 100;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -159,6 +158,7 @@
 
     /* State A: Cover Page Positioning */
     .hero-polaroid.state-cover {
+      display: flex !important;
       top: 50%;
       left: 28%;
       transform: translate(-50%, -50%) rotate(-3deg);
@@ -179,6 +179,7 @@
 
     /* State B: Perfectly Centered in Board Left Container */
     .hero-polaroid.state-board {
+      display: flex !important;
       top: var(--target-top, 50%);
       left: var(--target-left, 30%);
       transform: translate(-50%, -50%) rotate(-2deg);
@@ -196,11 +197,12 @@
       transition: opacity 0.4s ease 0.3s;
     }
 
-    /* State C: Hidden strictly on Intermission or other slides */
+    /* State C: STRICTLY HIDDEN */
     .hero-polaroid.state-hidden {
+      display: none !important;
       opacity: 0 !important;
+      visibility: hidden !important;
       pointer-events: none !important;
-      transform: translate(-50%, -50%) scale(0.9);
     }
 
     .hero-img {
@@ -316,7 +318,7 @@
       line-height: 1.3;
     }
 
-    /* Center Section - Optimized Split Layout */
+    /* Center Section */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
@@ -333,7 +335,6 @@
       gap: 2rem;
     }
 
-    /* Target Slot for Left Polaroid */
     .center-left {
       flex: 1.1;
       height: 100%;
@@ -477,6 +478,7 @@
       justify-content: center;
       text-align: center;
       height: 100%;
+      z-index: 50;
     }
     .intermission-title {
       font-size: 4.5rem;
@@ -800,7 +802,6 @@
       { id: 13, label: '大冒險', icon: 'fa-fire', type: 'adventure' }
     ];
 
-    // Calculate Target Exact Center Position in Board Left Slot
     function updateBoardTargetPosition() {
       const slot = document.getElementById('center-left-slot');
       if (slot) {
@@ -815,7 +816,6 @@
       }
     }
 
-    // Two-Stage Hero Transition to Board
     function startTransitionToBoard() {
       coverContent.classList.add('exit');
 
@@ -841,7 +841,7 @@
     function goToSlide(index) {
       slides[currentSlide].classList.remove('active');
       currentSlide = index;
-      slides[currentSlide].classList.add('active');
+      slides[index].classList.add('active');
 
       if (index === 0) {
         heroPolaroid.className = 'hero-polaroid state-cover';
@@ -850,12 +850,11 @@
         updateBoardTargetPosition();
         heroPolaroid.className = 'hero-polaroid state-board';
       } else {
-        // Force hide polaroid on Intermission Slide 3
+        // Direct absolute hide without any animations or transitions
         heroPolaroid.className = 'hero-polaroid state-hidden';
       }
     }
 
-    // Photo Upload
     function uploadPhoto(event) {
       const file = event.target.files[0];
       if (file) {
@@ -868,7 +867,6 @@
       }
     }
 
-    // Reset Game
     function resetGame() {
       if (confirm("確定要重新開始遊戲嗎？所有隊伍將回到起點。")) {
         teams.forEach(team => team.pos = 0);
@@ -878,7 +876,6 @@
       }
     }
 
-    // Render Board Grid
     function renderBoard() {
       const board = document.getElementById('board');
       const center = board.querySelector('.board-center');
@@ -934,7 +931,6 @@
       });
     }
 
-    // Step-by-Step Rolling & Jump Animation
     let isRolling = false;
     function rollDice() {
       if (isRolling) return;
@@ -1021,7 +1017,6 @@
       document.getElementById('challenge-modal').classList.remove('active');
     }
 
-    // Setup & Category Question Edit Modals
     function openSetupModal() {
       document.getElementById('setup-modal').classList.add('active');
       updateTeamInputs();
@@ -1073,7 +1068,6 @@
       document.getElementById('edit-modal').classList.remove('active');
     }
 
-    // Load saved photo on startup & Auto Recalculate
     window.onload = function() {
       const savedPhoto = localStorage.getItem('wedding_shared_photo');
       if(savedPhoto) {
