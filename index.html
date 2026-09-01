@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>我們的專屬大富翁 - 俊維 ❤️ 儷庭 Afterparty</title>
+  <title>我們的專屬大富翁 - Wei ❤️ Alice Afterparty</title>
   <!-- Google Fonts: Zen Maru Gothic (日系圓體) + Fredoka (可愛圓體) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap" rel="stylesheet">
   <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-all/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
@@ -85,7 +85,7 @@
     }
     .polaroid-frame {
       background: white;
-      padding: 1.5rem 1.5rem 3.5rem 1.5rem;
+      padding: 1.5rem 1.5rem 2rem 1.5rem;
       border-radius: 12px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.1);
       transform: rotate(-3deg);
@@ -106,16 +106,6 @@
       object-position: 50% 98%;
       border-radius: 6px;
       filter: grayscale(80%) contrast(120%) sepia(20%);
-    }
-    .polaroid-hint {
-      position: absolute;
-      bottom: 1.2rem;
-      width: 100%;
-      left: 0;
-      text-align: center;
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      letter-spacing: 1px;
     }
 
     .cover-content {
@@ -143,7 +133,7 @@
       margin-bottom: 1.5rem;
     }
     .names-tag {
-      font-size: 2rem;
+      font-size: 2.2rem;
       color: var(--morandi-rose-dark);
       font-weight: 700;
       margin-bottom: 2.5rem;
@@ -211,7 +201,7 @@
     .cell {
       background: white;
       border-radius: var(--radius-md);
-      padding: 0.8rem;
+      padding: 1rem 0.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -228,12 +218,12 @@
       border-color: var(--morandi-rose);
     }
     .cell-tag {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 700;
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.7rem;
       border-radius: 12px;
       color: white;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
     }
     .tag-adventure { background: var(--morandi-rose-dark); }
     .tag-gift { background: var(--morandi-sage); }
@@ -243,13 +233,13 @@
     .tag-start { background: var(--morandi-blue); }
 
     .cell-icon {
-      font-size: 1.8rem;
+      font-size: 2.2rem;
       color: var(--text-main);
-      margin: 0.2rem 0;
+      margin: 0.4rem 0;
     }
     .cell-title {
-      font-size: 0.95rem;
-      font-weight: 700;
+      font-size: 1.15rem;
+      font-weight: 900;
       color: var(--text-main);
     }
 
@@ -257,7 +247,7 @@
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
-      background: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.75);
       backdrop-filter: blur(10px);
       border-radius: var(--radius-lg);
       border: 2px dashed var(--border-color);
@@ -269,25 +259,25 @@
       position: relative;
     }
     .turn-badge {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 700;
       color: var(--text-main);
       background: white;
-      padding: 0.5rem 1.5rem;
+      padding: 0.6rem 1.8rem;
       border-radius: 30px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       margin-bottom: 1rem;
     }
     .dice-box {
-      width: 90px;
-      height: 90px;
+      width: 95px;
+      height: 95px;
       background: white;
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 3rem;
+      font-size: 3.2rem;
       color: var(--morandi-rose-dark);
       margin-bottom: 1.2rem;
       transition: transform 0.1s;
@@ -299,14 +289,18 @@
       0% { transform: rotate(0deg) scale(1); }
       25% { transform: rotate(15deg) scale(1.1); }
       50% { transform: rotate(-15deg) scale(1.1); }
-      75% { transform: rotate(10deg) scale(1.05); }
+      75% { transform: rotate(-10deg) scale(1.05); }
       100% { transform: rotate(0deg) scale(1); }
+    }
+    .btn-group {
+      display: flex;
+      gap: 1rem;
     }
     .roll-btn {
       background: var(--morandi-rose-dark);
       color: white;
       border: none;
-      padding: 0.9rem 2.5rem;
+      padding: 0.9rem 2.2rem;
       font-size: 1.3rem;
       font-weight: 700;
       border-radius: 40px;
@@ -315,6 +309,18 @@
       font-family: var(--font-family);
     }
     .roll-btn:hover { background: #B37B86; }
+    
+    .next-btn {
+      background: var(--text-main);
+      color: white;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 40px;
+      cursor: pointer;
+      font-family: var(--font-family);
+    }
 
     /* Pawns Container inside Cells */
     .pawn-container {
@@ -326,11 +332,11 @@
       justify-content: center;
     }
     .pawn {
-      width: 22px;
-      height: 22px;
+      width: 24px;
+      height: 24px;
       border-radius: 50%;
       color: white;
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -375,7 +381,7 @@
       background: white;
       border-radius: var(--radius-lg);
       padding: 2.5rem;
-      max-width: 550px;
+      max-width: 600px;
       width: 90%;
       box-shadow: 0 20px 50px rgba(0,0,0,0.15);
       text-align: center;
@@ -396,7 +402,7 @@
       color: var(--text-main);
     }
     .modal-desc {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 2rem;
@@ -412,7 +418,28 @@
       font-family: var(--font-family);
     }
 
-    /* Edit Questions Form */
+    /* Category Tab Edit Forms */
+    .tab-header {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+    }
+    .tab-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      background: white;
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .tab-btn.active {
+      background: var(--morandi-rose-dark);
+      color: white;
+      border-color: var(--morandi-rose-dark);
+    }
     .edit-form-group {
       text-align: left;
       margin-bottom: 1rem;
@@ -444,14 +471,13 @@
         <div class="cover-photo-wrapper">
           <div class="polaroid-frame" onclick="document.getElementById('photo-uploader').click()">
             <img id="cover-photo" class="polaroid-img" src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" alt="婚紗照">
-            <div class="polaroid-hint">📷 點擊替換婚紗照</div>
           </div>
           <input type="file" id="photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCoverPhoto(event)">
         </div>
         <div class="cover-content">
           <div class="badge">WEDDING AFTERPARTY</div>
           <h1 class="cover-title">我們的專屬大富翁</h1>
-          <div class="names-tag">Jun-Wei ❤️ Li-Ting</div>
+          <div class="names-tag">Wei ❤️ Alice</div>
           <button class="start-btn" onclick="nextSlide()">開啟大富翁 ➔</button>
         </div>
       </div>
@@ -465,6 +491,7 @@
           <span>我們的專屬大富翁</span>
         </div>
         <div class="header-controls">
+          <button class="tool-btn" onclick="goToSlide(0)"><i class="fa-solid fa-house"></i> 返回首頁</button>
           <button class="tool-btn" onclick="openSetupModal()"><i class="fa-solid fa-users"></i> 隊伍設定</button>
           <button class="tool-btn" onclick="openEditModal()"><i class="fa-solid fa-pen"></i> 編輯題目</button>
           <button class="tool-btn" onclick="nextSlide()"><i class="fa-solid fa-glass-cheers"></i> 中場休息</button>
@@ -476,7 +503,10 @@
         <div class="board-center">
           <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
           <div class="dice-box" id="dice-box">🎲</div>
-          <button class="roll-btn" onclick="rollDice()">🎲 擲骰移動</button>
+          <div class="btn-group">
+            <button class="roll-btn" onclick="rollDice()">🎲 擲骰子</button>
+            <button class="next-btn" onclick="nextTurn()">⏭️ 切換下一隊</button>
+          </div>
         </div>
       </div>
     </div>
@@ -521,16 +551,26 @@
     </div>
   </div>
 
-  <!-- Edit Questions Modal -->
+  <!-- Category Question Editor Modal -->
   <div class="modal-overlay" id="edit-modal">
     <div class="modal-card" style="max-width: 650px; text-align: left;">
-      <h2 class="modal-title" style="text-align: center;">📝 編輯大冒險題目</h2>
-      <div class="edit-form-group">
-        <label>新增/自訂大冒險（每行一個題目）：</label>
-        <textarea id="adventure-list-input" rows="8"></textarea>
+      <h2 class="modal-title" style="text-align: center;">📝 編輯各類別題目</h2>
+      
+      <div class="tab-header">
+        <button class="tab-btn active" onclick="switchTab('adventure')">🎭 大冒險</button>
+        <button class="tab-btn" onclick="switchTab('gift')">🎁 0元禮</button>
+        <button class="tab-btn" onclick="switchTab('chance')">✨ 機會卡</button>
+        <button class="tab-btn" onclick="switchTab('destiny')">🔮 命運卡</button>
+        <button class="tab-btn" onclick="switchTab('history')">📸 黑歷史</button>
       </div>
+
+      <div class="edit-form-group">
+        <label id="tab-label">編輯題目（每行一個選項）：</label>
+        <textarea id="category-input" rows="8"></textarea>
+      </div>
+
       <div style="text-align: center;">
-        <button class="modal-close-btn" onclick="saveQuestions()">儲存題目</button>
+        <button class="modal-close-btn" onclick="saveCategoryQuestions()">儲存題目</button>
       </div>
     </div>
   </div>
@@ -547,16 +587,35 @@
     ];
     let currentTeamIndex = 0;
 
-    let adventures = [
-      "鋼鐵人彈指 (Snap!)：戴上手套喊「I am Iron man」，新人配合演出倒下。(4秒影片)",
-      "神奇寶貝大師：對新人丟精靈球喊「決定就是你了！」，新人擺出收服姿勢。(定格拍照)",
-      "蜘蛛人對決：與新人同時半蹲擺出雙手吐絲姿勢互瞪。(定格拍照)",
-      "奧德修斯神弓：拉開隱形大弓瞄準新人，新人配合誇張後仰。(定格拍照)",
-      "咒術迴戰領域展開：雙手結印喊「無量空處」，新人做出當機表情。(定格拍照)",
-      "芙莉蓮飛吻暴擊：對新人送出飛吻，新人模仿勇者倒下。(4秒影片)",
-      "間諜家家酒安妮亞：雙手抱胸，對著鏡頭做出鄙視表情。(定格拍照)",
-      "名偵探柯南麻醉槍：假裝用手錶射擊，新人瞬間沉睡癱倒。(4秒影片)"
-    ];
+    let currentTab = 'adventure';
+    let cardPools = {
+      adventure: [
+        "鋼鐵人彈指 (Snap!)：戴上手套喊「I am Iron man」，新人配合演出倒下。(4秒影片)",
+        "神奇寶貝大師：對新人丟精靈球喊「決定就是你了！」，新人擺出收服姿勢。(定格拍照)",
+        "蜘蛛人對決：與新人同時半蹲擺出雙手吐絲姿勢互瞪。(定格拍照)",
+        "奧德修斯神弓：拉開隱形大弓瞄準新人，新人配合誇張後仰。(定格拍照)",
+        "咒術迴戰領域展開：雙手結印喊「無量空處」，新人做出當機表情。(定格拍照)",
+        "芙莉蓮飛吻暴擊：對新人送出飛吻，新人模仿勇者倒下。(4秒影片)",
+        "間諜家家酒安妮亞：雙手抱胸，對著鏡頭做出鄙視表情。(定格拍照)",
+        "名偵探柯南麻醉槍：假裝用手錶射擊，新人瞬間沉睡癱倒。(4秒影片)"
+      ],
+      gift: [
+        "🎁 獲得新郎 Alice/Wei 深情親親臉頰 10 秒！",
+        "🎁 現場餵食特權：由新人現場親手餵你吃甜點蛋糕！",
+        "🎁 拍立得合照：獲得與新人現場拍立得合照乙張！"
+      ],
+      chance: [
+        "✨ 機會卡：指定現場一位伴郎代表替你執行下一次任務！",
+        "✨ 機會卡：指定現場一位伴娘代表替你執行下一次任務！"
+      ],
+      destiny: [
+        "🔮 命運卡：現場真心話，回答 Alice 或 Wei 一個熱門八卦問題！",
+        "🔮 命運卡：全場連坐乾杯！邀請你那一桌親友一起舉杯！"
+      ],
+      history: [
+        "📸 黑歷史解密：大螢幕公開一張昔日搞笑舊照，需重現照片中的誇張姿勢！"
+      ]
+    };
 
     const boardCellsData = [
       { id: 0, tag: 'START', label: '起點', icon: 'fa-flag-checkered', type: 'start' },
@@ -603,12 +662,10 @@
     // Initialize Board Grid
     function renderBoard() {
       const board = document.getElementById('board');
-      // Clear previous cells except center
       const center = board.querySelector('.board-center');
       board.innerHTML = '';
       board.appendChild(center);
 
-      // Grid positions around the 5x4 matrix
       const positions = [
         {r:1, c:1}, {r:1, c:2}, {r:1, c:3}, {r:1, c:4}, {r:1, c:5},
         {r:2, c:5}, {r:3, c:5}, {r:4, c:5},
@@ -645,13 +702,11 @@
     }
 
     function renderPawns() {
-      // Clear all pawns
       boardCellsData.forEach((_, idx) => {
         const container = document.getElementById(`pawns-cell-${idx}`);
         if(container) container.innerHTML = '';
       });
 
-      // Append pawns
       teams.forEach((team) => {
         const container = document.getElementById(`pawns-cell-${team.pos}`);
         if(container) {
@@ -675,18 +730,17 @@
         const rolled = Math.floor(Math.random() * 6) + 1;
         diceBox.innerText = rolled;
 
-        // Move current team
         teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + rolled) % 14;
         renderPawns();
 
-        // Trigger Event
         const landedCell = boardCellsData[teams[currentTeamIndex].pos];
         setTimeout(() => triggerCellEvent(landedCell), 300);
-
-        // Advance Turn
-        currentTeamIndex = (currentTeamIndex + 1) % teams.length;
-        document.getElementById('turn-display').innerText = `${teams[currentTeamIndex].icon} 輪到：${teams[currentTeamIndex].name}`;
       }, 500);
+    }
+
+    function nextTurn() {
+      currentTeamIndex = (currentTeamIndex + 1) % teams.length;
+      document.getElementById('turn-display').innerText = `${teams[currentTeamIndex].icon} 輪到：${teams[currentTeamIndex].name}`;
     }
 
     function triggerCellEvent(cell) {
@@ -698,20 +752,9 @@
       tag.innerText = cell.tag;
       title.innerText = cell.label;
 
-      if(cell.type === 'adventure') {
-        const randAdv = adventures[Math.floor(Math.random() * adventures.length)];
-        desc.innerText = randAdv;
-      } else if(cell.type === 'gift') {
-        desc.innerText = "🎁 獲得 0 元現場驚喜好禮！獲得新人深情親親 10 秒或現場手餵甜點特權乙次！";
-      } else if(cell.type === 'chance') {
-        desc.innerText = "✨ 機會卡：指定現場一位伴郎/伴娘代表替你執行下一次大冒險！";
-      } else if(cell.type === 'destiny') {
-        desc.innerText = "🔮 命運卡：現場真心話大冒險，回答俊維或儷庭一個熱門八卦問題！";
-      } else if(cell.type === 'history') {
-        desc.innerText = "📸 黑歷史解密：大螢幕公開一張昔日搞笑舊照，需重現照片中的誇張姿勢！";
-      } else {
-        desc.innerText = "🎉 起點：全場所有人一起乾杯！祝福俊維與儷庭新婚快樂！";
-      }
+      const pool = cardPools[cell.type] || ["🎉 祝福 Wei & Alice 新婚快樂、永浴愛河！"];
+      const randItem = pool[Math.floor(Math.random() * pool.length)];
+      desc.innerText = randItem;
 
       modal.classList.add('active');
     }
@@ -720,7 +763,7 @@
       document.getElementById('challenge-modal').classList.remove('active');
     }
 
-    // Setup & Edit Modals
+    // Setup & Category Question Edit Modals
     function openSetupModal() {
       document.getElementById('setup-modal').classList.add('active');
       updateTeamInputs();
@@ -755,12 +798,18 @@
     }
 
     function openEditModal() {
-      document.getElementById('adventure-list-input').value = adventures.join('\n');
+      switchTab('adventure');
       document.getElementById('edit-modal').classList.add('active');
     }
-    function saveQuestions() {
-      const text = document.getElementById('adventure-list-input').value;
-      adventures = text.split('\n').filter(line => line.trim() !== '');
+    function switchTab(tabKey) {
+      currentTab = tabKey;
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('category-input').value = (cardPools[tabKey] || []).join('\n');
+    }
+    function saveCategoryQuestions() {
+      const text = document.getElementById('category-input').value;
+      cardPools[currentTab] = text.split('\n').filter(line => line.trim() !== '');
       document.getElementById('edit-modal').classList.remove('active');
     }
 
