@@ -153,7 +153,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+      transition: all 0.6s cubic-bezier(0.65, 0, 0.35, 1);
       margin: 0;
     }
 
@@ -163,6 +163,8 @@
       left: 28%;
       transform: translate(-50%, -50%) rotate(-3deg);
       width: 440px;
+      opacity: 1;
+      pointer-events: auto;
     }
     .hero-polaroid.state-cover .hero-img {
       height: 480px;
@@ -172,7 +174,7 @@
       height: 0;
       margin-top: 0;
       overflow: hidden;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
 
     /* State B: Perfectly Centered in Board Left Container */
@@ -181,6 +183,8 @@
       left: var(--target-left, 30%);
       transform: translate(-50%, -50%) rotate(-2deg);
       width: 310px;
+      opacity: 1;
+      pointer-events: auto;
     }
     .hero-polaroid.state-board .hero-img {
       height: 250px;
@@ -189,13 +193,14 @@
       opacity: 1;
       height: auto;
       margin-top: 1rem;
-      transition: opacity 0.5s ease 0.4s;
+      transition: opacity 0.4s ease 0.3s;
     }
 
-    /* State C: Hidden on other slides */
+    /* State C: Hidden strictly on Intermission or other slides */
     .hero-polaroid.state-hidden {
-      opacity: 0;
-      pointer-events: none;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      transform: translate(-50%, -50%) scale(0.9);
     }
 
     .hero-img {
@@ -203,7 +208,7 @@
       object-fit: cover;
       object-position: 50% 50%;
       border-radius: 4px;
-      transition: height 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+      transition: height 0.6s cubic-bezier(0.65, 0, 0.35, 1);
     }
     .hero-footer {
       text-align: center;
@@ -820,8 +825,7 @@
         currentSlide = 1;
 
         updateBoardTargetPosition();
-        heroPolaroid.classList.remove('state-cover');
-        heroPolaroid.classList.add('state-board');
+        heroPolaroid.className = 'hero-polaroid state-board';
       }, 400);
     }
 
@@ -831,8 +835,7 @@
       currentSlide = 0;
 
       coverContent.classList.remove('exit');
-      heroPolaroid.classList.remove('state-board');
-      heroPolaroid.classList.add('state-cover');
+      heroPolaroid.className = 'hero-polaroid state-cover';
     }
 
     function goToSlide(index) {
@@ -847,6 +850,7 @@
         updateBoardTargetPosition();
         heroPolaroid.className = 'hero-polaroid state-board';
       } else {
+        // Force hide polaroid on Intermission Slide 3
         heroPolaroid.className = 'hero-polaroid state-hidden';
       }
     }
