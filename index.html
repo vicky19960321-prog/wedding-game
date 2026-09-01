@@ -231,7 +231,7 @@
       line-height: 1.3;
     }
 
-    /* Center Section - Korean Polaroid Gallery Style */
+    /* Center Section - Left/Right Split Layout */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
@@ -240,26 +240,33 @@
       border-radius: var(--radius-lg);
       border: 2px dashed var(--border-color);
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      justify-content: space-between;
-      padding: 1.2rem 1.5rem;
+      justify-content: space-around;
+      padding: 1rem 2rem;
       position: relative;
+      gap: 1.5rem;
     }
 
-    /* Center Polaroid Frame Component */
+    /* Left: Polaroid Frame */
+    .center-left {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     .center-polaroid {
       background: white;
       padding: 0.8rem 0.8rem 1rem 0.8rem;
       border-radius: 10px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      transform: rotate(-1.5deg);
+      transform: rotate(-2deg);
       cursor: pointer;
       transition: all 0.25s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
-      max-width: 280px;
+      max-width: 240px;
       width: 100%;
     }
     .center-polaroid:hover {
@@ -268,7 +275,7 @@
     }
     .center-polaroid-img {
       width: 100%;
-      height: 180px;
+      height: 160px;
       object-fit: cover;
       object-position: 50% 50%;
       border-radius: 4px;
@@ -278,34 +285,45 @@
       text-align: center;
     }
     .center-polaroid-names {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 900;
       color: var(--morandi-rose-dark);
     }
     .center-polaroid-sub {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-style: italic;
       color: var(--text-muted);
       margin-top: 0.1rem;
     }
 
+    /* Right: Controls & Dice */
+    .center-right {
+      flex: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+
     .turn-badge {
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       font-weight: 900;
       color: var(--text-main);
       background: white;
-      padding: 0.4rem 1.6rem;
+      padding: 0.4rem 1.4rem;
       border-radius: 30px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       border: 1px solid var(--border-color);
+      white-space: nowrap;
     }
 
     /* Refined Clean 3D Cute Dice */
     .dice-scene {
-      width: 75px;
-      height: 75px;
+      width: 70px;
+      height: 70px;
       perspective: 600px;
-      margin: 0.2rem 0;
+      margin: 0.1rem 0;
     }
     .cube {
       width: 100%;
@@ -316,42 +334,42 @@
     }
     .cube-face {
       position: absolute;
-      width: 75px;
-      height: 75px;
+      width: 70px;
+      height: 70px;
       background: #FFFFFF;
       border-radius: 14px;
       box-shadow: inset 0 0 0 2px #E6DCD0, inset 0 -3px 6px rgba(0,0,0,0.05), 0 8px 16px rgba(0,0,0,0.08);
       display: grid;
       grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-      padding: 9px;
+      padding: 8px;
       align-items: center;
       justify-items: center;
       backface-visibility: hidden;
     }
     .dot {
-      width: 12px;
-      height: 12px;
+      width: 11px;
+      height: 11px;
       background: var(--morandi-rose-dark);
       border-radius: 50%;
       box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
     }
-    .face-1 { transform: rotateY(0deg) translateZ(37.5px); }
-    .face-2 { transform: rotateY(90deg) translateZ(37.5px); }
-    .face-3 { transform: rotateY(180deg) translateZ(37.5px); }
-    .face-4 { transform: rotateY(-90deg) translateZ(37.5px); }
-    .face-5 { transform: rotateX(90deg) translateZ(37.5px); }
-    .face-6 { transform: rotateX(-90deg) translateZ(37.5px); }
+    .face-1 { transform: rotateY(0deg) translateZ(35px); }
+    .face-2 { transform: rotateY(90deg) translateZ(35px); }
+    .face-3 { transform: rotateY(180deg) translateZ(35px); }
+    .face-4 { transform: rotateY(-90deg) translateZ(35px); }
+    .face-5 { transform: rotateX(90deg) translateZ(35px); }
+    .face-6 { transform: rotateX(-90deg) translateZ(35px); }
 
     .btn-group {
       display: flex;
-      gap: 0.8rem;
+      gap: 0.6rem;
     }
     .roll-btn {
       background: var(--morandi-rose-dark);
       color: white;
       border: none;
-      padding: 0.75rem 1.8rem;
-      font-size: 1.15rem;
+      padding: 0.7rem 1.6rem;
+      font-size: 1.1rem;
       font-weight: 700;
       border-radius: 40px;
       cursor: pointer;
@@ -364,8 +382,8 @@
       background: var(--text-main);
       color: white;
       border: none;
-      padding: 0.75rem 1.5rem;
-      font-size: 1.05rem;
+      padding: 0.7rem 1.3rem;
+      font-size: 1rem;
       font-weight: 700;
       border-radius: 40px;
       cursor: pointer;
@@ -553,34 +571,42 @@
       </div>
 
       <div class="monopoly-board" id="board">
-        <!-- Center Section with Korean Polaroid Gallery -->
+        <!-- Center Section - Left/Right Split Layout -->
         <div class="board-center">
-          <div class="center-polaroid" onclick="document.getElementById('center-photo-uploader').click()">
-            <img id="center-photo" class="center-polaroid-img" src="https://lh3.googleusercontent.com/d/1VdcImiHeczw-X-hxGd7fvn0P0XuzjCBV" alt="相框照片">
-            <div class="center-polaroid-footer">
-              <div class="center-polaroid-names">Wei ❤️ Alice</div>
-              <div class="center-polaroid-sub">“Eat, Drink, and be Married!”</div>
-            </div>
-          </div>
-          <input type="file" id="center-photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCenterPhoto(event)">
-
-          <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
           
-          <div class="dice-scene">
-            <div class="cube" id="cube">
-              <div class="cube-face face-1"><div class="dot" style="grid-area:2/2;"></div></div>
-              <div class="cube-face face-2"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
-              <div class="cube-face face-3"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:2/2;"></div><div class="dot" style="grid-area:3/3;"></div></div>
-              <div class="cube-face face-4"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
-              <div class="cube-face face-5"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:2/2;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
-              <div class="cube-face face-6"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:2/1;"></div><div class="dot" style="grid-area:2/3;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+          <!-- Left: Polaroid -->
+          <div class="center-left">
+            <div class="center-polaroid" onclick="document.getElementById('center-photo-uploader').click()">
+              <img id="center-photo" class="center-polaroid-img" src="https://lh3.googleusercontent.com/d/1VdcImiHeczw-X-hxGd7fvn0P0XuzjCBV" alt="相框照片">
+              <div class="center-polaroid-footer">
+                <div class="center-polaroid-names">Wei ❤️ Alice</div>
+                <div class="center-polaroid-sub">“Eat, Drink, and be Married!”</div>
+              </div>
+            </div>
+            <input type="file" id="center-photo-uploader" class="hidden-input" accept="image/*" onchange="uploadCenterPhoto(event)">
+          </div>
+
+          <!-- Right: Controls & Dice -->
+          <div class="center-right">
+            <div class="turn-badge" id="turn-display">🔴 輪到：第一隊</div>
+            
+            <div class="dice-scene">
+              <div class="cube" id="cube">
+                <div class="cube-face face-1"><div class="dot" style="grid-area:2/2;"></div></div>
+                <div class="cube-face face-2"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+                <div class="cube-face face-3"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:2/2;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+                <div class="cube-face face-4"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+                <div class="cube-face face-5"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:2/2;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+                <div class="cube-face face-6"><div class="dot" style="grid-area:1/1;"></div><div class="dot" style="grid-area:1/3;"></div><div class="dot" style="grid-area:2/1;"></div><div class="dot" style="grid-area:2/3;"></div><div class="dot" style="grid-area:3/1;"></div><div class="dot" style="grid-area:3/3;"></div></div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button class="roll-btn" id="roll-btn" onclick="rollDice()">🎲 擲骰子</button>
+              <button class="next-btn" onclick="nextTurn()">下一隊</button>
             </div>
           </div>
 
-          <div class="btn-group">
-            <button class="roll-btn" id="roll-btn" onclick="rollDice()">🎲 擲骰子</button>
-            <button class="next-btn" onclick="nextTurn()">下一隊</button>
-          </div>
         </div>
       </div>
     </div>
