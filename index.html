@@ -199,7 +199,6 @@
       position: relative;
     }
     
-    /* Cell Design: Big Titles + High Visibility Icon */
     .cell {
       background: white;
       border-radius: var(--radius-md);
@@ -221,22 +220,22 @@
     }
 
     .cell-icon {
-      font-size: 2.2rem;
+      font-size: 2.3rem;
       color: var(--morandi-rose-dark);
       margin-bottom: 0.5rem;
     }
     .cell-title {
-      font-size: 1.55rem; /* 大標題大幅放大，超越 Icon 顯眼度 */
+      font-size: 1.6rem; /* 超大標題，極佳遠距離視覺感 */
       font-weight: 900;
       color: var(--text-main);
       line-height: 1.3;
     }
 
-    /* Center Section with 3D Cute Dice */
+    /* Center Section with Ultra Realistic 3D Cute Dice */
     .board-center {
       grid-column: 2 / 5;
       grid-row: 2 / 4;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(12px);
       border-radius: var(--radius-lg);
       border: 2px dashed var(--border-color);
@@ -258,11 +257,11 @@
       margin-bottom: 1.2rem;
     }
 
-    /* Real 3D Cute Dice Scene */
+    /* Enhanced 3D Cute Realistic Dice Scene */
     .dice-scene {
-      width: 90px;
-      height: 90px;
-      perspective: 600px;
+      width: 95px;
+      height: 95px;
+      perspective: 800px;
       margin-bottom: 1.5rem;
     }
     .cube {
@@ -270,34 +269,35 @@
       height: 100%;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 1s cubic-bezier(0.2, 0.8, 0.3, 1);
+      transition: transform 1s cubic-bezier(0.25, 1.2, 0.35, 1);
     }
     .cube-face {
       position: absolute;
-      width: 90px;
-      height: 90px;
-      background: #FFFDF9;
-      border: 3px solid #E6DCD0;
-      border-radius: 18px;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+      width: 95px;
+      height: 95px;
+      background: linear-gradient(145deg, #FFFFFF, #F2EBE1);
+      border: 3.5px solid #E2D7C8;
+      border-radius: 22px;
+      box-shadow: inset 0 3px 8px rgba(255,255,255,0.8), inset 0 -3px 8px rgba(0,0,0,0.08), 0 8px 18px rgba(0,0,0,0.12);
       display: grid;
       grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-      padding: 10px;
+      padding: 12px;
       align-items: center;
       justify-items: center;
     }
     .dot {
-      width: 14px;
-      height: 14px;
-      background-color: var(--morandi-rose-dark);
+      width: 15px;
+      height: 15px;
+      background: radial-gradient(circle at 30% 30%, #D88E9E, #C48B96);
       border-radius: 50%;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
     }
-    .face-1 { transform: rotateY(0deg) translateZ(45px); }
-    .face-2 { transform: rotateY(90deg) translateZ(45px); }
-    .face-3 { transform: rotateY(180deg) translateZ(45px); }
-    .face-4 { transform: rotateY(-90deg) translateZ(45px); }
-    .face-5 { transform: rotateX(90deg) translateZ(45px); }
-    .face-6 { transform: rotateX(-90deg) translateZ(45px); }
+    .face-1 { transform: rotateY(0deg) translateZ(47.5px); }
+    .face-2 { transform: rotateY(90deg) translateZ(47.5px); }
+    .face-3 { transform: rotateY(180deg) translateZ(47.5px); }
+    .face-4 { transform: rotateY(-90deg) translateZ(47.5px); }
+    .face-5 { transform: rotateX(90deg) translateZ(47.5px); }
+    .face-6 { transform: rotateX(-90deg) translateZ(47.5px); }
 
     .btn-group {
       display: flex;
@@ -329,7 +329,7 @@
       font-family: var(--font-family);
     }
 
-    /* Super Visible Pawns Badge System */
+    /* High-Visibility Pawns System */
     .pawn-container {
       position: absolute;
       bottom: 6px;
@@ -351,11 +351,15 @@
       justify-content: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.25), 0 0 0 2.5px white;
       font-weight: bold;
-      animation: pawnJump 0.4s ease-out;
+      transition: all 0.3s;
+    }
+    .pawn-animating {
+      animation: pawnJump 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     @keyframes pawnJump {
-      0% { transform: translateY(-15px) scale(1.3); }
-      100% { transform: translateY(0) scale(1); }
+      0% { transform: translateY(-30px) scale(1.6); opacity: 0.5; }
+      50% { transform: translateY(-10px) scale(1.2); }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
     }
 
     /* Slide 3: Intermission */
@@ -408,7 +412,7 @@
       color: var(--text-main);
     }
     .modal-desc {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       color: var(--text-muted);
       line-height: 1.6;
       margin-bottom: 2rem;
@@ -521,7 +525,7 @@
           </div>
 
           <div class="btn-group">
-            <button class="roll-btn" onclick="rollDice()">🎲 擲骰子</button>
+            <button class="roll-btn" id="roll-btn" onclick="rollDice()">🎲 擲骰子</button>
             <button class="next-btn" onclick="nextTurn()">⏭️ 切換下一隊</button>
           </div>
         </div>
@@ -574,10 +578,10 @@
       
       <div class="tab-header">
         <button class="tab-btn active" onclick="switchTab('adventure', event)">🎭 大冒險</button>
-        <button class="tab-btn" onclick="switchTab('gift', event)">🎁 0元禮</button>
-        <button class="tab-btn" onclick="switchTab('chance', event)">✨ 機會卡</button>
-        <button class="tab-btn" onclick="switchTab('destiny', event)">🔮 命運卡</button>
-        <button class="tab-btn" onclick="switchTab('history', event)">📸 黑歷史</button>
+        <button class="tab-btn" onclick="switchTab('gift', event)">🎁 小驚喜</button>
+        <button class="tab-btn" onclick="switchTab('chance', event)">✨ 機會</button>
+        <button class="tab-btn" onclick="switchTab('destiny', event)">🔮 命運</button>
+        <button class="tab-btn" onclick="switchTab('truth', event)">💬 真心話</button>
       </div>
 
       <div class="edit-form-group">
@@ -621,33 +625,34 @@
         "🎁 拍立得合照：獲得與新人現場拍立得合照乙張！"
       ],
       chance: [
-        "✨ 機會卡：指定現場一位伴郎代表替你執行下一次任務！",
-        "✨ 機會卡：指定現場一位伴娘代表替你執行下一次任務！"
+        "✨ 機會：指定現場一位伴郎代表替你執行下一次任務！",
+        "✨ 機會：指定現場一位伴娘代表替你執行下一次任務！"
       ],
       destiny: [
-        "🔮 命運卡：現場真心話，回答 Alice 或 Wei 一個熱門八卦問題！",
-        "🔮 命運卡：全場連坐乾杯！邀請你那一桌親友一起舉杯！"
+        "🔮 命運：現場真心話，回答 Alice 或 Wei 一個熱門八卦問題！",
+        "🔮 命運：全場連坐乾杯！邀請你那一桌親友一起舉杯！"
       ],
-      history: [
-        "📸 黑歷史解密：大螢幕公開一張昔日搞笑舊照，需重現照片中的誇張姿勢！"
+      truth: [
+        "💬 真心話：誠實回答～第一次看到 Wei / Alice 時的第一印象是什麼？",
+        "💬 真心話：現場爆料！分享一個新人交往期間你印象最深刻的甜爆小故事！"
       ]
     };
 
     const boardCellsData = [
       { id: 0, label: '起點', icon: 'fa-flag-checkered', type: 'start' },
-      { id: 1, label: '爆笑大冒險', icon: 'fa-masks-theater', type: 'adventure' },
-      { id: 2, label: '現場即時好禮', icon: 'fa-gift', type: 'gift' },
-      { id: 3, label: '機會卡', icon: 'fa-wand-magic-sparkles', type: 'chance' },
-      { id: 4, label: '爆笑大冒險', icon: 'fa-bolt', type: 'adventure' },
-      { id: 5, label: '命運卡', icon: 'fa-crystal-ball', type: 'destiny' },
-      { id: 6, label: '黑歷史解密', icon: 'fa-camera-retro', type: 'history' },
-      { id: 7, label: '爆笑大冒險', icon: 'fa-clapperboard', type: 'adventure' },
-      { id: 8, label: '現場即時好禮', icon: 'fa-heart', type: 'gift' },
-      { id: 9, label: '機會卡', icon: 'fa-clover', type: 'chance' },
-      { id: 10, label: '爆笑大冒險', icon: 'fa-dragon', type: 'adventure' },
-      { id: 11, label: '命運卡', icon: 'fa-dice-five', type: 'destiny' },
-      { id: 12, label: '黑歷史解密', icon: 'fa-user-ninja', type: 'history' },
-      { id: 13, label: '爆笑大冒險', icon: 'fa-fire', type: 'adventure' }
+      { id: 1, label: '大冒險', icon: 'fa-masks-theater', type: 'adventure' },
+      { id: 2, label: '小驚喜', icon: 'fa-gift', type: 'gift' },
+      { id: 3, label: '機會', icon: 'fa-wand-magic-sparkles', type: 'chance' },
+      { id: 4, label: '大冒險', icon: 'fa-bolt', type: 'adventure' },
+      { id: 5, label: '命運', icon: 'fa-crystal-ball', type: 'destiny' },
+      { id: 6, label: '真心話', icon: 'fa-comments', type: 'truth' },
+      { id: 7, label: '大冒險', label: '大冒險', icon: 'fa-clapperboard', type: 'adventure' },
+      { id: 8, label: '小驚喜', icon: 'fa-heart', type: 'gift' },
+      { id: 9, label: '機會', icon: 'fa-clover', type: 'chance' },
+      { id: 10, label: '大冒險', icon: 'fa-dragon', type: 'adventure' },
+      { id: 11, label: '命運', icon: 'fa-dice-five', type: 'destiny' },
+      { id: 12, label: '真心話', icon: 'fa-comment-dots', type: 'truth' },
+      { id: 13, label: '大冒險', icon: 'fa-fire', type: 'adventure' }
     ];
 
     // Navigation
@@ -709,17 +714,20 @@
       renderPawns();
     }
 
-    function renderPawns() {
+    function renderPawns(activeTeamIdx = -1) {
       boardCellsData.forEach((_, idx) => {
         const container = document.getElementById(`pawns-cell-${idx}`);
         if(container) container.innerHTML = '';
       });
 
-      teams.forEach((team) => {
+      teams.forEach((team, idx) => {
         const container = document.getElementById(`pawns-cell-${team.pos}`);
         if(container) {
           const pawnEl = document.createElement('div');
           pawnEl.className = 'pawn';
+          if (idx === activeTeamIdx) {
+            pawnEl.classList.add('pawn-animating');
+          }
           pawnEl.style.backgroundColor = team.color;
           pawnEl.innerText = team.icon;
           pawnEl.title = team.name;
@@ -728,12 +736,19 @@
       });
     }
 
-    // Real 3D Rolling Dice Logic
+    // Ultra-Realistic 3D Rolling Dice & Perfect Animation Sequencing
+    let isRolling = false;
     function rollDice() {
+      if (isRolling) return;
+      isRolling = true;
+
       const cube = document.getElementById('cube');
+      const rollBtn = document.getElementById('roll-btn');
+      rollBtn.disabled = true;
+
       const rolled = Math.floor(Math.random() * 6) + 1;
 
-      // Calculate 3D Rotations for specific numbers
+      // Rotations mapping for precise 3D face alignment
       const rotations = {
         1: { x: 0, y: 0 },
         2: { x: 0, y: -90 },
@@ -744,18 +759,28 @@
       };
 
       const targetRot = rotations[rolled];
-      // Add extra full 720 deg spins for animation feel
-      const extraX = 720;
+      // Multi-axis rotations for extra realistic rolling trajectory
+      const extraX = 1080;
       const extraY = 720;
 
       cube.style.transform = `rotateX(${targetRot.x + extraX}deg) rotateY(${targetRot.y + extraY}deg)`;
 
+      // Step 1: Wait for 3D Dice to finish rolling (1s)
       setTimeout(() => {
+        // Update current team position
         teams[currentTeamIndex].pos = (teams[currentTeamIndex].pos + rolled) % 14;
-        renderPawns();
+        
+        // Step 2: Render Pawns and trigger Pawn Jump Pulse Animation (0.6s)
+        renderPawns(currentTeamIndex);
 
-        const landedCell = boardCellsData[teams[currentTeamIndex].pos];
-        setTimeout(() => triggerCellEvent(landedCell), 300);
+        // Step 3: Wait for Pawn Jump animation to complete before showing Modal
+        setTimeout(() => {
+          const landedCell = boardCellsData[teams[currentTeamIndex].pos];
+          triggerCellEvent(landedCell);
+          isRolling = false;
+          rollBtn.disabled = false;
+        }, 650);
+
       }, 1000);
     }
 
